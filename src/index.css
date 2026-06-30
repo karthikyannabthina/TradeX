@@ -1,0 +1,11 @@
+/* 🌙 DARK MODE */
+.dark {
+  background-color: #0f0f0f;
+  color: white;
+}
+
+/* ☀️ LIGHT MODE */
+.light {
+  background-color: #f5f5f5;
+  color: black;
+}

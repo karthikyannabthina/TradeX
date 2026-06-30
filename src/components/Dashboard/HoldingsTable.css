@@ -1,0 +1,42 @@
+.holdings-table{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.holdings-table h2{
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    text-align:left;
+    padding:15px;
+    color:#666;
+    background:#f7f8fa;
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid #ececec;
+}
+
+tbody tr:hover{
+    background:#fafafa;
+    cursor:pointer;
+}
+
+.green{
+    color:#00a651;
+    font-weight:bold;
+}
+
+.red{
+    color:#e53935;
+    font-weight:bold;
+}

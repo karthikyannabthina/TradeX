@@ -1,0 +1,53 @@
+.summary-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+}
+
+.summary-card{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.summary-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.summary-card h4{
+
+color:#777;
+
+font-weight:500;
+
+}
+
+.summary-card h2{
+
+margin:15px 0;
+
+font-size:30px;
+
+}
+
+.summary-card p{
+
+font-weight:bold;
+
+color:#00a651;
+
+}

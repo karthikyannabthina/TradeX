@@ -1,0 +1,10 @@
+.portfolio-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.portfolio-card h2{
+    margin-bottom:20px;
+}

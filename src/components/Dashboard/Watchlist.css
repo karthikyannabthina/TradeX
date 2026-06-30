@@ -1,0 +1,37 @@
+.watchlist{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.watchlist h2{
+    margin-bottom:20px;
+}
+
+.stock{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.stock:last-child{
+    border:none;
+}
+
+.stock p{
+    margin:0;
+    font-weight:600;
+}
+
+.green{
+    color:#00a651;
+    font-weight:bold;
+}
+
+.red{
+    color:#e53935;
+    font-weight:bold;
+}

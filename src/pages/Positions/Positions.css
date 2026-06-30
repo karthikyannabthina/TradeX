@@ -1,0 +1,65 @@
+.positions-page{
+
+padding:30px;
+
+}
+
+.day-card{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+margin:25px 0;
+
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+}
+
+.green{
+
+color:#16a34a;
+
+}
+
+table{
+
+width:100%;
+
+background:white;
+
+border-collapse:collapse;
+
+border-radius:15px;
+
+overflow:hidden;
+
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+}
+
+th{
+
+background:#f8fafc;
+
+padding:18px;
+
+text-align:left;
+
+}
+
+td{
+
+padding:18px;
+
+border-bottom:1px solid #eee;
+
+}
+
+tbody tr:hover{
+
+background:#f9fafb;
+
+}

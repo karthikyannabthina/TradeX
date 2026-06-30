@@ -1,0 +1,127 @@
+/* Navbar */
+
+.navbar {
+  height: 70px;
+  padding: 0 30px;
+  background: #111827;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo */
+
+.left {
+  flex: 1;
+}
+
+.left h2 {
+  color: #387ed1;
+  font-weight: 700;
+}
+
+/* Navigation */
+
+.nav-links {
+  flex: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #d1d5db;
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+.nav-links a.active {
+  color: #387ed1;
+}
+
+/* Right Section */
+
+.right {
+  flex: 1;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Search */
+
+.right input {
+  width: 220px;
+  padding: 10px 14px;
+
+  border: none;
+  border-radius: 8px;
+  outline: none;
+
+  background: #1f2937;
+  color: white;
+
+  transition: 0.3s;
+}
+
+.right input::placeholder {
+  color: #9ca3af;
+}
+
+.right input:focus {
+  background: #374151;
+}
+
+/* Notification */
+
+.bell {
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bell:hover {
+  color: #387ed1;
+  transform: scale(1.1);
+}
+
+/* Login Button */
+
+.login-btn {
+  text-decoration: none;
+
+  background: #387ed1;
+  color: white;
+
+  padding: 10px 20px;
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: #2f6ec0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(56, 126, 209, 0.3);
+}
