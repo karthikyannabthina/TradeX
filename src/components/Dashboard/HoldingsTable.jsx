@@ -1,36 +1,119 @@
+import { useEffect, useMemo, useState } from "react";
+
+import useMarketData from "../../context/useMarketData";
+import { getPortfolio } from "../../services/portfolioService";
+
 import "./HoldingsTable.css";
 
-const holdings = [
-  {
-    symbol: "TCS",
-    qty: 10,
-    avg: 3400,
-    ltp: 3560,
-  },
-  {
-    symbol: "INFY",
-    qty: 15,
-    avg: 1700,
-    ltp: 1725,
-  },
-  {
-    symbol: "RELIANCE",
-    qty: 5,
-    avg: 2920,
-    ltp: 2980,
-  },
-  {
-    symbol: "HDFCBANK",
-    qty: 20,
-    avg: 1810,
-    ltp: 1840,
-  },
-];
-
 export default function HoldingsTable() {
+  const [holdings, setHoldings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const { getStock } = useMarketData();
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadPortfolio = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const result = await getPortfolio();
+
+        const portfolio = result?.data?.portfolio;
+
+        if (!cancelled) {
+          setHoldings(
+            Array.isArray(portfolio?.holdings)
+              ? portfolio.holdings
+              : []
+          );
+        }
+      } catch (err) {
+        console.error("Portfolio API error:", err);
+
+        if (!cancelled) {
+          setError("Unable to load holdings.");
+          setHoldings([]);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadPortfolio();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const rows = useMemo(() => {
+    return holdings.map((holding) => {
+      const marketStock = getStock(holding.symbol);
+
+      const avgPrice = Number(
+        holding.averagePrice ?? 0
+      );
+
+      const quantity = Number(
+        holding.quantity ?? 0
+      );
+
+      const ltp = Number(
+        marketStock?.price ??
+        marketStock?.ltp ??
+        marketStock?.currentPrice ??
+        avgPrice
+      );
+
+      const pnl = (ltp - avgPrice) * quantity;
+
+      const pnlPercent = avgPrice
+        ? ((ltp - avgPrice) / avgPrice) * 100
+        : 0;
+
+      return {
+        symbol: holding.symbol,
+        quantity,
+        avgPrice,
+        ltp,
+        pnl,
+        pnlPercent,
+      };
+    });
+  }, [holdings, getStock]);
+
+  if (loading) {
+    return (
+      <div className="holdings-table">
+        <p>Loading holdings...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="holdings-table">
+        <p className="red">{error}</p>
+      </div>
+    );
+  }
+
+  if (!rows.length) {
+    return (
+      <div className="holdings-table">
+        <p>No holdings available.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="holdings-table">
-      <h2>Holdings</h2>
 
       <table>
         <thead>
@@ -44,24 +127,57 @@ export default function HoldingsTable() {
         </thead>
 
         <tbody>
-          {holdings.map((stock) => {
-            const pnl = (stock.ltp - stock.avg) * stock.qty;
+          {rows.map((stock) => (
+            <tr key={stock.symbol}>
 
-            return (
-              <tr key={stock.symbol}>
-                <td>{stock.symbol}</td>
-                <td>{stock.qty}</td>
-                <td>₹{stock.avg}</td>
-                <td>₹{stock.ltp}</td>
+              <td>
+                <strong>
+                  {stock.symbol}
+                </strong>
+              </td>
 
-                <td className={pnl >= 0 ? "green" : "red"}>
-                  ₹{pnl}
-                </td>
-              </tr>
-            );
-          })}
+              <td>
+                {stock.quantity}
+              </td>
+
+              <td>
+                ₹{stock.avgPrice.toLocaleString("en-IN", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </td>
+
+              <td>
+                ₹{stock.ltp.toLocaleString("en-IN", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </td>
+
+              <td
+                className={
+                  stock.pnl >= 0
+                    ? "green"
+                    : "red"
+                }
+              >
+                {stock.pnl >= 0 ? "+" : ""}
+                ₹{stock.pnl.toLocaleString("en-IN", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+
+                <small>
+                  {" "}
+                  ({stock.pnlPercent.toFixed(2)}%)
+                </small>
+              </td>
+
+            </tr>
+          ))}
         </tbody>
       </table>
+
     </div>
   );
 }

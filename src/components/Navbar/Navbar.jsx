@@ -1,67 +1,69 @@
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaBell } from "react-icons/fa";
-import {
-  FaChartPie,
-  FaShoppingBag,
-  FaWallet,
-  FaChartLine,
-  FaMoneyBill,
-  FaUser,
-} from "react-icons/fa";
 
 import "./Navbar.css";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Navbar() {
+  const { user, logout } = useAuth();
+
   return (
     <nav className="navbar">
-      {/* Logo */}
-      <div className="left">
-        <h2>Zerodha</h2>
+
+      <div className="navbar-spacer" />
+
+      <div className="navbar-right">
+
+        <div className="navbar-search">
+          <input
+            type="text"
+            placeholder="Search stocks..."
+          />
+        </div>
+
+        <button className="notification-btn">
+          <FaBell />
+          <span />
+        </button>
+
+        {user ? (
+          <div className="user-menu">
+
+            <div className="user-avatar">
+              {(user.name || user.email || "U")
+                .charAt(0)
+                .toUpperCase()}
+            </div>
+
+            <div className="user-info">
+              <strong>
+                {user.name || "User"}
+              </strong>
+
+              <small>
+                Investor
+              </small>
+            </div>
+
+            <button
+              className="logout-btn"
+              onClick={logout}
+            >
+              Logout
+            </button>
+
+          </div>
+        ) : (
+          <Link
+            to="/login"
+            className="login-btn"
+          >
+            Login
+          </Link>
+        )}
+
       </div>
 
-      {/* Navigation */}
-      <div className="nav-links">
-        <NavLink to="/">
-          <FaChartPie />
-          <span>Dashboard</span>
-        </NavLink>
-
-        <NavLink to="/orders">
-          <FaShoppingBag />
-          <span>Orders</span>
-        </NavLink>
-
-        <NavLink to="/holdings">
-          <FaWallet />
-          <span>Holdings</span>
-        </NavLink>
-
-        <NavLink to="/positions">
-          <FaChartLine />
-          <span>Positions</span>
-        </NavLink>
-
-        <NavLink to="/funds">
-          <FaMoneyBill />
-          <span>Funds</span>
-        </NavLink>
-
-        <NavLink to="/profile">
-          <FaUser />
-          <span>Profile</span>
-        </NavLink>
-      </div>
-
-      {/* Right Section */}
-      <div className="right">
-        <input type="text" placeholder="Search stocks..." />
-
-        <FaBell className="bell" />
-
-        <Link to="/login" className="login-btn">
-          Login
-        </Link>
-      </div>
     </nav>
   );
 }

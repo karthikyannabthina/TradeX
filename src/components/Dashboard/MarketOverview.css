@@ -1,0 +1,70 @@
+.market-card {
+  padding: 24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(13,22,35,0.96),
+      rgba(9,16,27,0.96)
+    );
+
+  border: 1px solid rgba(255,255,255,0.065);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.18);
+}
+
+
+.market-card h2 {
+  margin: 0 0 18px;
+
+  color: #eaf0f7;
+
+  font-size: 18px;
+}
+
+
+.market-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 0;
+
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+
+.market-row:last-child {
+  border-bottom: none;
+}
+
+
+.market-row h4 {
+  margin: 0 0 4px;
+
+  color: #dce5ef;
+
+  font-size: 13px;
+}
+
+
+.market-row small {
+  color: #687c96;
+
+  font-size: 12px;
+}
+
+
+.green {
+  color: #16c784;
+  font-weight: 750;
+}
+
+
+.red {
+  color: #ff5b6e;
+  font-weight: 750;
+}

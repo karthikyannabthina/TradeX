@@ -1,0 +1,23 @@
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;z-index:2000;padding:20px;
+}
+
+.buy-modal{
+  width:100%;max-width:520px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:22px;box-shadow:var(--shadow-1);color:var(--text);
+}
+
+.buy-modal h2{margin:0 0 10px 0;color:var(--text)}
+.buy-modal p{color:var(--text-2);margin:4px 0}
+.buy-modal input[type="number"]{width:120px}
+
+.buy-modal .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+
+.buy-modal button{padding:10px 14px;border-radius:10px;border:0;cursor:pointer}
+
+.buy-modal button:first-child{background:var(--accent);color:white}
+.buy-modal button:last-child{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text-2)}
+
+@media (max-width:480px){
+  .buy-modal{padding:16px}
+  .buy-modal .actions{flex-direction:column-reverse}
+}

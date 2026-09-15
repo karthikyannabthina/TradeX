@@ -1,0 +1,92 @@
+.live-price {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  padding: var(--space-6, 20px);
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-sm, 0 6px 18px rgba(8,10,16,0.45));
+  color: var(--text-primary, #e6eef8);
+  backdrop-filter: blur(6px);
+}
+
+.live-price__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.live-price__header h2 {
+  margin: 0;
+  font-size: var(--text-sm, 14px);
+  color: var(--muted, #9fb0c8);
+  font-weight: 600;
+}
+
+.live-price__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--success, #00c853);
+}
+
+.live-price__badge.offline {
+  color: var(--warning, #ffb74d);
+}
+
+.live-price__badge .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: livePricePulse 1.6s infinite;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.live-price__value {
+  font-size: var(--text-xl, 34px);
+  margin: 10px 0 4px;
+  font-weight: 700;
+  color: var(--accent, #cfeaff);
+}
+
+.live-price__change {
+  font-weight: 700;
+  margin: 0;
+}
+
+.live-price__change.up {
+  color: var(--success, #00c853);
+}
+
+.live-price__change.down {
+  color: var(--danger, #ff6b6b);
+}
+
+.live-price__updated {
+  color: var(--muted, #9fb0c8);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+@keyframes livePricePulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.92);
+  }
+}
+
+@media (max-width: 640px) {
+  .live-price__value {
+    font-size: 28px;
+  }
+  .live-price {
+    padding: var(--space-4, 14px);
+  }
+}

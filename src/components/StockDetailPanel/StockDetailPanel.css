@@ -1,0 +1,572 @@
+.stock-detail-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.35);
+}
+
+
+.stock-detail-panel {
+  width: 100%;
+  max-width: 720px;
+
+  background: #ffffff;
+
+  border-radius: 4px;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.2);
+
+  overflow: hidden;
+}
+
+
+/* SEARCH */
+
+.stock-detail-search {
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 0 20px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+
+.search-icon {
+  font-size: 28px;
+
+  color: #555;
+}
+
+
+.stock-detail-search input {
+  flex: 1;
+
+  border: none;
+  outline: none;
+
+  font-size: 16px;
+
+  color: #333;
+}
+
+
+.stock-detail-search input::placeholder {
+  color: #999;
+}
+
+
+.shortcut {
+  padding: 7px 12px;
+
+  border: 1px solid #e5e5e5;
+
+  border-radius: 4px;
+
+  font-size: 12px;
+
+  color: #888;
+
+  background: #fafafa;
+}
+
+
+/* HEADER */
+
+.stock-detail-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 22px 26px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+
+.stock-detail-name {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  font-size: 19px;
+}
+
+
+.stock-detail-name span {
+  color: #777;
+
+  font-size: 14px;
+}
+
+
+.stock-detail-price {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.stock-detail-price strong {
+  font-size: 18px;
+}
+
+
+.stock-detail-price span {
+  font-size: 14px;
+}
+
+
+.positive {
+  color: #00a651;
+}
+
+
+.negative {
+  color: #f44336;
+}
+
+
+/* ORDER BOOK */
+
+.order-book {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 28px;
+
+  padding: 18px 26px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+
+.order-heading,
+.order-row,
+.order-total {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr 1fr;
+}
+
+
+.order-heading {
+  margin-bottom: 8px;
+
+  color: #999;
+
+  font-size: 13px;
+}
+
+
+.order-heading span:nth-child(2),
+.order-row span:nth-child(2) {
+  text-align: center;
+}
+
+
+.order-heading span:nth-child(3),
+.order-row span:nth-child(3),
+.order-total span:nth-child(3) {
+  text-align: right;
+}
+
+
+.order-row {
+  height: 28px;
+
+  align-items: center;
+
+  font-size: 14px;
+}
+
+
+.bid {
+  color: #2979ff;
+}
+
+
+.offer {
+  color: #ff3d00;
+}
+
+
+.order-total {
+  margin-top: 7px;
+
+  padding-top: 8px;
+
+  border-top: 1px solid #eeeeee;
+
+  font-size: 14px;
+}
+
+
+.bid-total {
+  color: #2979ff;
+}
+
+
+.offer-total {
+  color: #ff3d00;
+}
+
+
+/* MARKET STATS */
+
+.market-stats {
+  padding: 22px 26px;
+
+  background: #fafafa;
+}
+
+
+.stats-row {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr 1fr 1fr;
+
+  align-items: center;
+
+  margin-bottom: 13px;
+}
+
+
+.stats-row span {
+  color: #999;
+
+  font-size: 14px;
+}
+
+
+.stats-row strong {
+  color: #555;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  text-align: right;
+}
+
+
+.price-range {
+  position: relative;
+
+  height: 20px;
+
+  margin: 5px 0 12px;
+}
+
+
+.range-line {
+  position: absolute;
+
+  top: 9px;
+  left: 0;
+  right: 0;
+
+  height: 4px;
+
+  background: #dddddd;
+}
+
+
+.range-dot {
+  position: absolute;
+
+  top: 6px;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #888;
+}
+
+
+.range-dot.left {
+  left: 15%;
+}
+
+
+.range-dot.right {
+  right: 5%;
+}
+
+
+/* ACTIONS */
+
+.stock-detail-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 25px 26px;
+}
+
+
+.trade-buttons {
+  display: flex;
+
+  gap: 10px;
+}
+
+
+.stock-detail-actions button {
+  height: 45px;
+
+  padding: 0 24px;
+
+  border-radius: 4px;
+
+  background: white;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.gtt-button {
+  border: 1px solid #2979ff;
+
+  color: #2979ff;
+}
+
+
+.buy-button {
+  border: 1px solid #2979ff;
+
+  color: #2979ff;
+}
+
+
+.sell-button {
+  border: 1px solid #ff3d00;
+
+  color: #ff3d00;
+}
+
+
+.close-button {
+  border: 1px solid #888;
+
+  color: #555;
+}
+
+
+.gtt-button:hover,
+.buy-button:hover {
+  background: #eef5ff;
+}
+
+
+.sell-button:hover {
+  background: #fff1ed;
+}
+
+
+.close-button:hover {
+  background: #f5f5f5;
+}
+
+/* =====================================
+   BUY / SELL ORDER MODAL
+   ===================================== */
+
+.order-modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 10000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.order-modal {
+  width: 400px;
+
+  background: #ffffff;
+
+  border-radius: 6px;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.2);
+
+  overflow: hidden;
+}
+
+.order-modal-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 20px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.order-modal-header h3 {
+  margin: 0;
+
+  font-size: 18px;
+}
+
+.order-modal-header span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #888;
+
+  font-size: 13px;
+}
+
+.order-modal-close {
+  border: none;
+
+  background: transparent;
+
+  color: #777;
+
+  font-size: 25px;
+
+  cursor: pointer;
+}
+
+.order-modal-body {
+  padding: 20px;
+}
+
+.order-info {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.order-info span {
+  color: #888;
+
+  font-size: 14px;
+}
+
+.order-info strong {
+  color: #333;
+
+  font-size: 15px;
+}
+
+.order-field {
+  margin-bottom: 20px;
+}
+
+.order-field label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #777;
+
+  font-size: 14px;
+}
+
+.order-field input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 11px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 4px;
+
+  outline: none;
+
+  font-size: 15px;
+}
+
+.order-field input:focus {
+  border-color: #2979ff;
+}
+
+.order-modal-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding: 16px 20px;
+
+  border-top: 1px solid #eeeeee;
+}
+
+.order-modal-actions button {
+  padding: 10px 20px;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+}
+
+.order-cancel {
+  border: 1px solid #aaa;
+
+  background: white;
+
+  color: #555;
+}
+
+.order-confirm-buy {
+  border: 1px solid #2979ff;
+
+  background: #2979ff;
+
+  color: white;
+}
+
+.order-confirm-sell {
+  border: 1px solid #ff3d00;
+
+  background: #ff3d00;
+
+  color: white;
+}

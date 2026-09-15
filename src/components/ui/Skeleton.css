@@ -1,0 +1,15 @@
+.skeleton{
+  display:inline-block;
+  background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 100%);
+  border-radius:8px;
+  overflow:hidden;
+  position:relative;
+}
+.skeleton::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+  transform:translateX(-100%);
+  animation:shimmer 1.2s infinite;
+}
+@keyframes shimmer{100%{transform:translateX(100%)}}

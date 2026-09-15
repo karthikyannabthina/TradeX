@@ -1,65 +1,7 @@
-.positions-page{
-
-padding:30px;
-
-}
-
-.day-card{
-
-background:white;
-
-padding:25px;
-
-border-radius:15px;
-
-margin:25px 0;
-
-box-shadow:0 4px 12px rgba(0,0,0,.08);
-
-}
-
-.green{
-
-color:#16a34a;
-
-}
-
-table{
-
-width:100%;
-
-background:white;
-
-border-collapse:collapse;
-
-border-radius:15px;
-
-overflow:hidden;
-
-box-shadow:0 4px 12px rgba(0,0,0,.08);
-
-}
-
-th{
-
-background:#f8fafc;
-
-padding:18px;
-
-text-align:left;
-
-}
-
-td{
-
-padding:18px;
-
-border-bottom:1px solid #eee;
-
-}
-
-tbody tr:hover{
-
-background:#f9fafb;
-
-}
+﻿.positions-page{padding:20px}
+.day-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;margin:20px 0;box-shadow:var(--shadow-1)}
+.green{color:var(--success)}
+table{width:100%;background:transparent;border-collapse:collapse;border-radius:12px;overflow:hidden}
+th{background:rgba(255,255,255,0.02);padding:12px;text-align:left;color:var(--text-2)}
+td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-2)}
+tbody tr:hover{background:rgba(255,255,255,0.01)}

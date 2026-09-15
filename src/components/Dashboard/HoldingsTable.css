@@ -1,42 +1,25 @@
-.holdings-table{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
-}
+.holdings-table{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:14px;box-shadow:var(--shadow-1);color:var(--text)}
+.holdings-table h2{margin-bottom:12px;color:var(--text)}
 
-.holdings-table h2{
-    margin-bottom:20px;
-}
+table{width:100%;border-collapse:collapse}
 
-table{
-    width:100%;
-    border-collapse:collapse;
-}
+th{text-align:left;padding:12px;color:var(--text-2);background:rgba(255,255,255,0.02)}
 
-th{
-    text-align:left;
-    padding:15px;
-    color:#666;
-    background:#f7f8fa;
-}
+td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-2)}
 
-td{
-    padding:15px;
-    border-bottom:1px solid #ececec;
-}
+tbody tr:hover{background:rgba(255,255,255,0.01);cursor:pointer}
 
-tbody tr:hover{
-    background:#fafafa;
-    cursor:pointer;
-}
+.green{color:var(--success);font-weight:700}
+.red{color:var(--danger);font-weight:700}
 
-.green{
-    color:#00a651;
-    font-weight:bold;
-}
-
-.red{
-    color:#e53935;
-    font-weight:bold;
+/* Responsive: transform table rows into cards on small screens */
+@media (max-width: 720px) {
+  .holdings-table { padding: 12px; }
+  .holdings-table table, .holdings-table thead, .holdings-table tbody, .holdings-table th, .holdings-table td, .holdings-table tr { display: block; width: 100%; }
+  .holdings-table thead { display: none; }
+  .holdings-table tbody { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .holdings-table tbody tr { background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.02); }
+  .holdings-table td { display: flex; justify-content: space-between; padding: 6px 0; border: none; }
+  .holdings-table td .label { color: var(--muted); font-size: 12px; }
+  .holdings-table td .value { color: var(--text); font-weight:700 }
 }

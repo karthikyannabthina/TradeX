@@ -1,84 +1,113 @@
+import { useState } from "react";
 import "./Orders.css";
 
-const orders = [
-  {
-    type: "BUY",
-    stock: "TCS",
-    qty: 10,
-    price: 3560,
-    status: "Completed",
-  },
-  {
-    type: "SELL",
-    stock: "INFY",
-    qty: 5,
-    price: 1720,
-    status: "Pending",
-  },
-  {
-    type: "BUY",
-    stock: "HDFC",
-    qty: 20,
-    price: 1840,
-    status: "Completed",
-  },
-];
+import ordersData from "./ordersData";
+import OrderSummary from "./OrderSummary";
+import OrderFilters from "./OrderFilters";
+import OrdersTable from "./OrdersTable";
+import EmptyState from "./EmptyState";
+import OrderModal from "./OrderModal";
+import NewOrderModal from "./NewOrderModal";
 
 export default function Orders() {
+
+  // Orders State
+  const [orders, setOrders] = useState(ordersData);
+
+  // Filter States
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("All");
+  const [type, setType] = useState("All");
+
+  // Selected Order (View Modal)
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
+  // New Order Modal
+  const [showNewOrder, setShowNewOrder] = useState(false);
+
+  // Add New Order
+  function addOrder(newOrder) {
+    setOrders((prevOrders) => [newOrder, ...prevOrders]);
+  }
+
+  // Filter Orders
+  const filteredOrders = orders.filter((order) => {
+
+    const matchesSearch =
+      order.stock.toLowerCase().includes(search.toLowerCase());
+
+    const matchesStatus =
+      status === "All" || order.status === status;
+
+    const matchesType =
+      type === "All" || order.type === type;
+
+    return matchesSearch && matchesStatus && matchesType;
+
+  });
+
   return (
     <div className="orders-page">
 
+      {/* Header */}
+
       <div className="orders-header">
 
-        <h1>Orders</h1>
+        <div>
+          <h1>Orders</h1>
+          <p>Manage and track all your stock orders.</p>
+        </div>
 
-        <button>+ New Order</button>
+        <button
+          className="new-order-btn"
+          onClick={() => setShowNewOrder(true)}
+        >
+          + New Order
+        </button>
 
       </div>
 
-      <table>
+      {/* Summary */}
 
-        <thead>
+      <OrderSummary orders={filteredOrders} />
 
-          <tr>
+      {/* Filters */}
 
-            <th>Type</th>
+      <OrderFilters
+        search={search}
+        setSearch={setSearch}
+        status={status}
+        setStatus={setStatus}
+        type={type}
+        setType={setType}
+      />
 
-            <th>Stock</th>
+      {/* Table */}
 
-            <th>Qty</th>
+      {filteredOrders.length > 0 ? (
+        <OrdersTable
+          orders={filteredOrders}
+          onView={setSelectedOrder}
+        />
+      ) : (
+        <EmptyState />
+      )}
 
-            <th>Price</th>
+      {/* View Order Modal */}
 
-            <th>Status</th>
+      <OrderModal
+        order={selectedOrder}
+        onClose={() => setSelectedOrder(null)}
+      />
 
-          </tr>
+      {/* New Order Modal */}
 
-        </thead>
-
-        <tbody>
-
-          {orders.map((order, index) => (
-
-            <tr key={index}>
-
-              <td>{order.type}</td>
-
-              <td>{order.stock}</td>
-
-              <td>{order.qty}</td>
-
-              <td>₹{order.price}</td>
-
-              <td>{order.status}</td>
-
-            </tr>
-
-          ))}
-
-        </tbody>
-
-      </table>
+      {showNewOrder && (
+        <NewOrderModal
+          onClose={() => setShowNewOrder(false)}
+          onAddOrder={addOrder}
+        />
+      )}
 
     </div>
   );

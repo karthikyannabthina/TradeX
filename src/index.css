@@ -1,11 +1,42 @@
-/* 🌙 DARK MODE */
-.dark {
-  background-color: #0f0f0f;
-  color: white;
-}
+:root{
+  --bg: #05080d;
+  --card: #0b121d;
+  --surface: #0b121d;
 
-/* ☀️ LIGHT MODE */
-.light {
-  background-color: #f5f5f5;
-  color: black;
+  --muted: #71839b;
+  --text: #e8eef6;
+  --text-2: #a8b7ca;
+
+  --accent: #387ed1;
+  --accent-2: #6366f1;
+
+  --glass: rgba(255,255,255,0.025);
+
+  --success: #16c784;
+  --danger: #ff5b6e;
+
+  --radius: 14px;
+
+  --shadow-1:
+    0 18px 45px rgba(0,0,0,0.20);
+}
+body {
+  margin: 0;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background: #05080d;
+
+  color: var(--text);
+
+  -webkit-font-smoothing: antialiased;
+
+  line-height: 1.45;
 }

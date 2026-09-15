@@ -1,0 +1,25 @@
+.live-market{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:16px;box-shadow:var(--shadow-1);color:var(--text)}
+
+.live-market__header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.live-market__header h2{margin:0;font-size:18px;color:var(--text)}
+.live-market__subtitle{margin:4px 0 0;font-size:13px;color:var(--text-2)}
+
+.live-market__status{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;white-space:nowrap;color:var(--success)}
+.live-market__status.offline{color:#f59e0b}
+.live-market__status .dot{width:8px;height:8px;border-radius:50%;background:currentColor;animation:liveMarketPulse 1.4s infinite}
+
+.live-market__controls{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.live-market__tabs,.live-market__sort{display:flex;gap:8px;flex-wrap:wrap}
+
+.live-market__tabs button,.live-market__sort button{border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text-2);font-size:13px;font-weight:600;padding:8px 12px;border-radius:18px;cursor:pointer;transition:all .12s}
+.live-market__tabs button:hover,.live-market__sort button:hover{background:rgba(255,255,255,0.02)}
+.live-market__tabs button.active,.live-market__sort button.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border-color:transparent}
+.live-market__tabs .count{opacity:0.85;font-weight:700;margin-left:6px}
+
+.live-market__empty{color:var(--text-2);font-size:13px;padding:10px 0}
+
+.live-market__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+
+.stock-card-clickable{cursor:pointer}
+
+@keyframes liveMarketPulse{0%,100%{opacity:1}50%{opacity:.35}}

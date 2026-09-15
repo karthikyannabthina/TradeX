@@ -1,79 +1,51 @@
-.orders-page{
+﻿/* Orders page styles adapted to design tokens */
+.orders-page{padding:20px}
 
-padding:30px;
+.orders-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px}
+.orders-header p{color:var(--text-2);margin-top:4px}
 
+.new-order-btn{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;min-height:44px}
+.new-order-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(56,126,209,0.12)}
+
+.view-btn{min-height:40px}
+
+@media (max-width:720px){
+  .view-btn, .new-order-btn { width:100%; display:block }
 }
 
-.orders-header{
+.order-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:18px 0}
+.summary-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;box-shadow:var(--shadow-1)}
+.summary-card h3{font-size:18px;margin:0;color:var(--text)}
+.summary-card p{color:var(--text-2);margin:6px 0 0}
 
-display:flex;
+.order-filters{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.order-filters input,.order-filters select{padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text);min-width:200px}
 
-justify-content:space-between;
+.orders-table-container{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;overflow:hidden;box-shadow:var(--shadow-1)}
+.orders-table{width:100%;border-collapse:collapse}
+.orders-table th{background:rgba(255,255,255,0.02);font-weight:700;color:var(--text-2);padding:12px;text-align:left}
+.orders-table td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-2)}
+.orders-table tbody tr:hover{background:rgba(255,255,255,0.01)}
 
-align-items:center;
+.empty-state{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:40px;text-align:center;border-radius:12px;box-shadow:var(--shadow-1)}
 
-margin-bottom:30px;
+.buy-badge{background:rgba(16,185,129,0.12);color:var(--success);padding:6px 12px;border-radius:18px;font-weight:700}
+.sell-badge{background:rgba(239,68,68,0.06);color:var(--danger);padding:6px 12px;border-radius:18px;font-weight:700}
 
-}
+.status{padding:6px 12px;border-radius:18px;font-weight:700}
+.status.completed{background:rgba(16,185,129,0.06);color:var(--success)}
+.status.pending{background:rgba(245,158,11,0.06);color:#b45309}
+.status.cancelled{background:rgba(239,68,68,0.06);color:var(--danger)}
 
-.orders-header button{
+.view-btn{background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:0;cursor:pointer}
+.view-btn:hover{transform:translateY(-1px)}
 
-background:#387ed1;
-
-color:white;
-
-border:none;
-
-padding:12px 20px;
-
-border-radius:8px;
-
-cursor:pointer;
-
-}
-
-.orders-header button:hover{
-
-background:#2d6dc4;
-
-}
-
-table{
-
-width:100%;
-
-background:white;
-
-border-collapse:collapse;
-
-border-radius:15px;
-
-overflow:hidden;
-
-box-shadow:0 4px 12px rgba(0,0,0,.08);
-
-}
-
-th{
-
-background:#f8fafc;
-
-padding:18px;
-
-text-align:left;
-
-}
-
-td{
-
-padding:18px;
-
-border-bottom:1px solid #eee;
-
-}
-
-tbody tr:hover{
-
-background:#f9fafb;
-
-}
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;justify-content:center;align-items:center;z-index:2000}
+.order-modal{width:100%;max-width:640px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;overflow:hidden;animation:popup .18s ease}
+@keyframes popup{from{transform:scale(.98);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.modal-body{padding:16px}
+.modal-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
+.modal-footer{padding:16px;text-align:right}
+.modal-body input,.modal-body select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)}
