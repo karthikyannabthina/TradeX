@@ -1,60 +1,80 @@
 .summary-grid {
   display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
   width: 100%;
+
+  border: 1px solid #1d2530;
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  background: #0b1017;
 }
 
 .summary-card {
   position: relative;
 
   min-width: 0;
+  min-height: 118px;
 
-  padding: 19px 22px;
+  padding: 20px 22px;
 
-  min-height: 108px;
+  background: #0b1017;
 
-  background: transparent;
+  border-right: 1px solid #1d2530;
 
-  border: 0;
+  transition: background 0.15s ease;
+}
 
-  box-shadow: none;
-
-  transition: background .2s ease;
+.summary-card:last-child {
+  border-right: none;
 }
 
 .summary-card:hover {
-  transform: none;
-
-  background: rgba(255,255,255,.018);
+  background: #0e141c;
 }
+
+
+/* =========================
+   TITLE
+========================= */
 
 .summary-card h4 {
   margin: 0;
 
-  color: #78869a;
+  color: #697589;
 
   font-size: 10px;
   font-weight: 700;
 
-  letter-spacing: .75px;
+  letter-spacing: 0.08em;
 
   text-transform: uppercase;
 }
 
+
+/* =========================
+   VALUE
+========================= */
+
 .summary-card h2 {
-  margin: 11px 0 5px;
+  margin: 14px 0 7px;
 
-  color: #eef3f9;
+  color: #f1f5f9;
 
-  font-size: 23px;
+  font-size: 24px;
   line-height: 1;
 
-  font-weight: 750;
+  font-weight: 700;
 
-  letter-spacing: -.5px;
+  letter-spacing: -0.6px;
 }
+
+
+/* =========================
+   CHANGE
+========================= */
 
 .summary-card p {
   min-height: 15px;
@@ -64,26 +84,47 @@
   color: #10b981;
 
   font-size: 11px;
-
-  font-weight: 700;
+  font-weight: 600;
 }
 
-@media (max-width: 800px) {
 
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
   .summary-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .summary-card:nth-child(2) {
+    border-right: none;
+  }
+
+  .summary-card:nth-child(-n + 2) {
+    border-bottom: 1px solid #1d2530;
+  }
 }
 
-@media (max-width: 500px) {
-
+@media (max-width: 600px) {
   .summary-grid {
     grid-template-columns: 1fr;
   }
 
   .summary-card {
     min-height: 94px;
+
+    padding: 17px 18px;
+
+    border-right: none;
+    border-bottom: 1px solid #1d2530;
   }
 
+  .summary-card:last-child {
+    border-bottom: none;
+  }
+
+  .summary-card h2 {
+    font-size: 21px;
+  }
 }

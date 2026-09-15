@@ -1,26 +1,156 @@
 import axios from "axios";
 import { API_BASE_URL } from "../utils/constants";
 
-// Central axios instance for the frontend. Use the VITE_API_URL to control
-// the full API base path (include /v1 if your backend uses it).
 const api = axios.create({
   baseURL: API_BASE_URL,
-  withCredentials: true, // enable if backend uses cookies for auth
+  withCredentials: true,
 });
 
-// Attach Authorization header if an access token exists in localStorage.
-// Note: prefer httpOnly cookies where possible; this is a pragmatic default
-// for apps using bearer tokens stored in memory/localStorage.
+let isRefreshing = false;
+let refreshSubscribers = [];
+
+const subscribeToRefresh = (callback) => {
+  refreshSubscribers.push(callback);
+};
+
+const notifyRefreshSubscribers = (token) => {
+  refreshSubscribers.forEach((callback) => callback(token));
+  refreshSubscribers = [];
+};
+
+const refreshAccessToken = async () => {
+  const response = await axios.post(
+    `${API_BASE_URL}/auth/refresh`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+
+  const data = response.data;
+  const result = data?.data || data;
+
+  const newToken = result?.accessToken;
+
+  if (!newToken) {
+    throw new Error("Refresh token did not return an access token");
+  }
+
+  localStorage.setItem("accessToken", newToken);
+
+  return newToken;
+};
+
+/* =========================================================
+   REQUEST INTERCEPTOR
+   ========================================================= */
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken");
+
     if (token) {
       config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
   (error) => Promise.reject(error)
+);
+
+/* =========================================================
+   RESPONSE INTERCEPTOR
+   ========================================================= */
+
+api.interceptors.response.use(
+  (response) => response,
+
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (!error.response) {
+      return Promise.reject(error);
+    }
+
+    const isUnauthorized = error.response.status === 401;
+
+    const isRefreshRequest =
+      originalRequest?.url?.includes("/auth/refresh");
+
+    const isLoginRequest =
+      originalRequest?.url?.includes("/auth/login");
+
+    const isRegisterRequest =
+      originalRequest?.url?.includes("/auth/register");
+
+    /*
+     * Do not try refreshing for:
+     * - refresh itself
+     * - login
+     * - registration
+     */
+
+    if (
+      !isUnauthorized ||
+      originalRequest?._retry ||
+      isRefreshRequest ||
+      isLoginRequest ||
+      isRegisterRequest
+    ) {
+      return Promise.reject(error);
+    }
+
+    originalRequest._retry = true;
+
+    /*
+     * If another request is already refreshing the token,
+     * wait for that refresh instead of creating another one.
+     */
+
+    if (isRefreshing) {
+      return new Promise((resolve, reject) => {
+        subscribeToRefresh((newToken) => {
+          if (!newToken) {
+            reject(error);
+            return;
+          }
+
+          originalRequest.headers =
+            originalRequest.headers || {};
+
+          originalRequest.headers.Authorization =
+            `Bearer ${newToken}`;
+
+          resolve(api(originalRequest));
+        });
+      });
+    }
+
+    isRefreshing = true;
+
+    try {
+      const newToken = await refreshAccessToken();
+
+      notifyRefreshSubscribers(newToken);
+
+      originalRequest.headers =
+        originalRequest.headers || {};
+
+      originalRequest.headers.Authorization =
+        `Bearer ${newToken}`;
+
+      return api(originalRequest);
+    } catch (refreshError) {
+      refreshSubscribers = [];
+
+      localStorage.removeItem("accessToken");
+
+      return Promise.reject(refreshError);
+    } finally {
+      isRefreshing = false;
+    }
+  }
 );
 
 export default api;

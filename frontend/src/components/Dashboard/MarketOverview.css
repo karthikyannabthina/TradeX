@@ -1,70 +1,137 @@
+/* =========================================================
+   MARKET OVERVIEW
+========================================================= */
+
 .market-card {
-  padding: 24px;
+  width: 100%;
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(13,22,35,0.96),
-      rgba(9,16,27,0.96)
-    );
+  padding: 0 20px 14px;
 
-  border: 1px solid rgba(255,255,255,0.065);
+  background: transparent;
 
-  border-radius: 14px;
-
-  box-shadow:
-    0 18px 45px rgba(0,0,0,0.18);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 
-.market-card h2 {
-  margin: 0 0 18px;
-
-  color: #eaf0f7;
-
-  font-size: 18px;
-}
-
+/* =========================================================
+   MARKET ROW
+========================================================= */
 
 .market-row {
+  min-height: 62px;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
-  padding: 16px 0;
+  padding: 12px 0;
 
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid #18202a;
+
+  transition: background 0.15s ease;
 }
 
+.market-row:hover {
+  background: #0e141c;
+}
 
-.market-row:last-child {
+.market-row:last-of-type {
   border-bottom: none;
 }
 
 
+/* =========================================================
+   INDEX NAME
+========================================================= */
+
 .market-row h4 {
   margin: 0 0 4px;
 
-  color: #dce5ef;
-
-  font-size: 13px;
-}
-
-
-.market-row small {
-  color: #687c96;
+  color: #dbe4f0;
 
   font-size: 12px;
+  font-weight: 650;
 }
 
+.market-row small {
+  color: #718096;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   CHANGE
+========================================================= */
+
+.market-row > span {
+  font-size: 11px;
+  font-weight: 650;
+}
 
 .green {
-  color: #16c784;
-  font-weight: 750;
+  color: #10b981;
+}
+
+.red {
+  color: #ef5350;
 }
 
 
-.red {
-  color: #ff5b6e;
-  font-weight: 750;
+/* =========================================================
+   LIVE STATUS
+========================================================= */
+
+.market-live-status {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding-top: 12px;
+
+  color: #667589;
+
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.market-live-status .dot {
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 6px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+.market-live-status .dot.live {
+  color: #10b981;
+
+  box-shadow:
+    0 0 0 3px rgba(16, 185, 129, 0.08);
+}
+
+.market-live-status .dot.offline {
+  color: #f59e0b;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .market-card {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .market-row {
+    min-height: 58px;
+  }
 }

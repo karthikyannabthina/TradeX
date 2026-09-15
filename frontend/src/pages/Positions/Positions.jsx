@@ -21,60 +21,79 @@ const positions = [
   },
 ];
 
+const formatCurrency = (value) =>
+  `₹${Number(value).toLocaleString("en-IN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+
 export default function Positions() {
   return (
     <div className="positions-page">
-
       <h1>Open Positions</h1>
 
       <div className="day-card">
-
         <h3>Today's P&L</h3>
-
         <h2 className="green">+₹2,340</h2>
-
       </div>
 
       <table>
-
         <thead>
-
           <tr>
-
             <th>Stock</th>
-
             <th>Qty</th>
-
-            <th>Avg</th>
-
-            <th>Current</th>
-
+            <th>Avg Price</th>
+            <th>LTP</th>
+            <th>P&L</th>
+            <th>P&L %</th>
           </tr>
-
         </thead>
 
         <tbody>
+          {positions.map((item) => {
+            const investment =
+              Math.abs(item.qty) * item.avg;
 
-          {positions.map((item) => (
+            const currentValue =
+              Math.abs(item.qty) * item.current;
 
-            <tr key={item.stock}>
+            const pnl =
+              currentValue - investment;
 
-              <td>{item.stock}</td>
+            const pnlPercent = investment
+              ? (pnl / investment) * 100
+              : 0;
 
-              <td>{item.qty}</td>
+            const positive = pnl >= 0;
 
-              <td>₹{item.avg}</td>
+            return (
+              <tr key={item.stock}>
+                <td>{item.stock}</td>
 
-              <td>₹{item.current}</td>
+                <td>{item.qty}</td>
 
-            </tr>
+                <td>
+                  {formatCurrency(item.avg)}
+                </td>
 
-          ))}
+                <td>
+                  {formatCurrency(item.current)}
+                </td>
 
+                <td className={positive ? "green" : "red"}>
+                  {positive ? "+" : ""}
+                  {formatCurrency(pnl)}
+                </td>
+
+                <td className={positive ? "green" : "red"}>
+                  {positive ? "+" : ""}
+                  {pnlPercent.toFixed(2)}%
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
-
       </table>
-
     </div>
   );
 }

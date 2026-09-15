@@ -38,7 +38,7 @@ export default function ProfileHeader() {
 
       </div>
 
-      <button>
+      <button className="edit-profile-btn">
 
         <FaEdit />
 

@@ -12,7 +12,7 @@ export default function OrderFilters({
       <input
         type="text"
         className="input"
-        placeholder="🔍 Search by stock name..."
+        placeholder="Search by stock name..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />

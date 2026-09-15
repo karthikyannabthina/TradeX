@@ -1,13 +1,182 @@
-.watchlist{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;box-shadow:var(--shadow-1);color:var(--text)}
-.watchlist h2{margin-bottom:0;color:var(--text)}
-.watchlist__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.watchlist__status{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--success)}
-.watchlist__status.offline{color:#f59e0b}
-.watchlist__status .dot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;animation:pulse 1.4s infinite}
-.watchlist__empty{color:var(--text-2);font-size:13px}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.stock{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
-.stock:last-child{border:none}
-.stock p{margin:0;font-weight:600;color:var(--text)}
-.green{color:var(--success);font-weight:700}
-.red{color:var(--danger);font-weight:700}
+/* =========================================================
+   WATCHLIST
+========================================================= */
+
+.watchlist {
+  width: 100%;
+
+  padding: 4px 20px 14px;
+
+  background: transparent;
+
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+
+  color: #e8edf5;
+}
+
+
+/* =========================================================
+   HEADER
+   Hidden because DashboardContent owns the panel heading
+========================================================= */
+
+.watchlist__header {
+  display: none;
+}
+
+
+/* =========================================================
+   LIVE STATUS
+========================================================= */
+
+.watchlist__status {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: #10b981;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.watchlist__status.offline {
+  color: #f59e0b;
+}
+
+.watchlist__status .dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+
+/* =========================================================
+   STOCK ROW
+========================================================= */
+
+.stock {
+  min-height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 2px;
+
+  border-bottom: 1px solid #18202a;
+
+  transition: background 0.15s ease;
+}
+
+.stock:last-child {
+  border-bottom: none;
+}
+
+.stock:hover {
+  background: #0e141c;
+}
+
+
+/* =========================================================
+   SYMBOL
+========================================================= */
+
+.stock__symbol {
+  min-width: 0;
+}
+
+.stock__symbol strong {
+  display: block;
+
+  color: #e7edf5;
+
+  font-size: 12px;
+  font-weight: 650;
+
+  letter-spacing: 0.01em;
+}
+
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.stock__price {
+  text-align: right;
+}
+
+.stock__price p {
+  margin: 0;
+
+  color: #e8eef7;
+
+  font-size: 12px;
+  font-weight: 650;
+
+  line-height: 1.2;
+}
+
+.stock__price span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 10px;
+  font-weight: 650;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   MOVEMENT
+========================================================= */
+
+.green {
+  color: #10b981;
+}
+
+.red {
+  color: #ef5350;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.watchlist__empty {
+  margin: 0;
+
+  padding: 24px 0;
+
+  color: #718096;
+
+  text-align: center;
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .watchlist {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .stock {
+    min-height: 62px;
+  }
+}

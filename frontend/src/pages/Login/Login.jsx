@@ -28,7 +28,7 @@ export default function Login() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h1>Zerodha</h1>
+        <h1>TradeX</h1>
         <h2>Login</h2>
 
         <form onSubmit={handleLogin}>

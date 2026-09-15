@@ -1,6 +1,6 @@
 .sidebar {
-  width: 230px;
-  flex: 0 0 280px;
+  width: 250px;
+  flex: 0 0 250px;
   height: 100vh;
 
   position: sticky;
@@ -9,114 +9,188 @@
   display: flex;
   flex-direction: column;
 
-  padding: 30px 18px 20px;
+  padding: 24px 14px 18px;
 
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(56, 126, 209, 0.08),
-      transparent 32%
-    ),
-    linear-gradient(
-      180deg,
-      #071126 0%,
-      #050d1d 100%
-    );
-
-  border-right: 1px solid rgba(255, 255, 255, 0.055);
+  background: #0a0e14;
+  border-right: 1px solid #1b222d;
 }
+
+/* =========================
+   BRAND
+========================= */
 
 .brand {
-  padding: 0 12px;
-  margin-bottom: 56px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 10px;
+
+  margin-bottom: 34px;
 }
 
-.brand h3 {
-  margin: 0;
-  color: #438df5;
-  font-size: 22px;
-  font-weight: 750;
-  letter-spacing: -0.5px;
+.brand-mark {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  background: #387ed1;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
 }
+
+.brand-name {
+  color: #f1f5f9;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  letter-spacing: -0.4px;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
 
 .side-nav {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+
+  gap: 26px;
 }
+
+.nav-section {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.nav-section-title {
+  margin: 0;
+
+  padding: 0 12px;
+
+  color: #667085;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.nav-section-items {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+/* =========================
+   NAV ITEM
+========================= */
 
 .side-nav a {
   position: relative;
 
+  height: 42px;
+
   display: flex;
   align-items: center;
+
   gap: 12px;
 
-  height: 46px;
-  padding: 0 14px;
+  padding: 0 12px;
 
-  color: #91a0b8;
+  color: #8b95a7;
+
   text-decoration: none;
 
-  border-radius: 12px;
+  border-radius: 7px;
 
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
 
   transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .side-nav a svg {
-  width: 18px;
-  height: 18px;
-  opacity: 0.9;
+  width: 16px;
+  height: 16px;
+
+  flex-shrink: 0;
 }
 
 .side-nav a:hover {
-  color: #e8eef8;
-  background: rgba(255, 255, 255, 0.035);
+  color: #e8edf5;
+  background: #11161e;
 }
 
+/* =========================
+   ACTIVE
+========================= */
+
 .side-nav a.active {
+  color: #ffffff;
+
+  background: #141b25;
+}
+
+.side-nav a.active svg {
   color: #438df5;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(56, 126, 209, 0.17),
-      rgba(56, 126, 209, 0.055)
-    );
-
-  box-shadow:
-    inset 0 0 0 1px rgba(56, 126, 209, 0.08);
 }
 
 .side-nav a.active::before {
   content: "";
 
   position: absolute;
-  left: -18px;
-  top: 11px;
+
+  left: -14px;
+  top: 9px;
 
   width: 3px;
-  height: 30px;
+  height: 24px;
 
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 3px 3px 0;
 
   background: #438df5;
 }
 
+/* =========================
+   FOOTER
+========================= */
+
 .side-footer {
   margin-top: auto;
-  padding: 0 12px;
+
+  padding: 14px 12px 0;
+
+  border-top: 1px solid #171d26;
 }
 
 .side-footer small {
-  color: #66758d;
+  color: #586274;
+
+  font-size: 11px;
 }
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width: 900px) {
   .sidebar {

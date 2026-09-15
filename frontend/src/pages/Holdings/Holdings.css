@@ -1,10 +1,362 @@
-﻿.holdings-page{padding:20px}
-.portfolio-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}
-.summary-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;box-shadow:var(--shadow-1)}
-.summary-card h4{color:var(--text-2);margin-bottom:8px}
-.green{color:var(--success)}
-.red{color:var(--danger)}
-table{width:100%;border-collapse:collapse;background:transparent;border-radius:12px;overflow:hidden}
-th{background:rgba(255,255,255,0.02);padding:12px;text-align:left;color:var(--text-2)}
-td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-2)}
-tbody tr:hover{background:rgba(255,255,255,0.01)}
+﻿/* =========================================================
+   HOLDINGS PAGE
+========================================================= */
+
+.holdings-page {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+
+  color: #e8edf5;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.holdings-page > h1 {
+  margin: 0;
+
+  color: #f1f5f9;
+
+  font-size: 25px;
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+}
+
+.holdings-page > h1 + p {
+  margin: 8px 0 0;
+
+  color: #69778b;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   PORTFOLIO SUMMARY
+========================================================= */
+
+.portfolio-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  margin: 22px 0 18px;
+
+  border: 1px solid #1d2530;
+  border-radius: 7px;
+
+  overflow: hidden;
+
+  background: #0b1017;
+}
+
+
+/* =========================================================
+   SUMMARY CARD
+========================================================= */
+
+.portfolio-summary .summary-card {
+  min-width: 0;
+  min-height: 100px;
+
+  padding: 18px 20px;
+
+  border-right: 1px solid #1d2530;
+
+  background: #0b1017;
+
+  box-shadow: none;
+
+  transition: background 0.15s ease;
+}
+
+.portfolio-summary .summary-card:last-child {
+  border-right: none;
+}
+
+.portfolio-summary .summary-card:hover {
+  background: #0e141c;
+}
+
+
+/* =========================================================
+   SUMMARY LABEL
+========================================================= */
+
+.portfolio-summary .summary-card h4 {
+  margin: 0;
+
+  color: #69778b;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   SUMMARY VALUE
+========================================================= */
+
+.portfolio-summary .summary-card h2 {
+  margin: 10px 0 0;
+
+  color: #edf2f8;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: -0.4px;
+}
+
+
+/* =========================================================
+   PROFIT / LOSS
+========================================================= */
+
+.holdings-page .green {
+  color: #10b981;
+}
+
+.holdings-page .red {
+  color: #ef5350;
+}
+
+
+/* =========================================================
+   HOLDINGS TABLE WRAPPER
+========================================================= */
+
+.holdings-page > table {
+  width: 100%;
+
+  min-width: 620px;
+
+  border-collapse: collapse;
+
+  border: 1px solid #1d2530;
+
+  border-radius: 7px;
+
+  overflow: hidden;
+
+  background: #0b1017;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.holdings-page > table th {
+  height: 42px;
+
+  padding: 0 16px;
+
+  border-bottom: 1px solid #202833;
+
+  background: #0a0f15;
+
+  color: #69778b;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.07em;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.holdings-page > table td {
+  height: 56px;
+
+  padding: 0 16px;
+
+  border-bottom: 1px solid #18202a;
+
+  color: #8b97a8;
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+.holdings-page > table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.holdings-page > table tbody tr:hover {
+  background: #0e141c;
+}
+
+.holdings-page > table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   STOCK SYMBOL
+========================================================= */
+
+.holdings-page > table td:first-child {
+  color: #edf2f8;
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
+
+/* =========================================================
+   P&L COLUMN
+========================================================= */
+
+.holdings-page > table td:last-child {
+  font-weight: 650;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.holdings-page > p {
+  margin: 0;
+
+  padding: 35px 20px;
+
+  border: 1px solid #1d2530;
+  border-radius: 7px;
+
+  background: #0b1017;
+
+  color: #69778b;
+
+  text-align: center;
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.holdings-page > p.red {
+  color: #ef5350;
+}
+
+
+/* =========================================================
+   LOADING STATE
+========================================================= */
+
+.holdings-page > h1 + p {
+  padding: 28px 0;
+
+  border: none;
+
+  background: transparent;
+}
+
+
+/* =========================================================
+   TABLE SCROLLING
+========================================================= */
+
+@media (max-width: 800px) {
+  .holdings-page {
+    overflow-x: hidden;
+  }
+
+  .holdings-page > table {
+    display: block;
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #2a3442 transparent;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 700px) {
+  .portfolio-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-summary .summary-card {
+    min-height: 82px;
+
+    border-right: none;
+    border-bottom: 1px solid #1d2530;
+  }
+
+  .portfolio-summary .summary-card:last-child {
+    border-bottom: none;
+  }
+
+  .portfolio-summary .summary-card h2 {
+    font-size: 20px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+  .holdings-page > h1 {
+    font-size: 22px;
+  }
+
+  .holdings-page > h1 + p {
+    font-size: 11px;
+  }
+
+  .portfolio-summary {
+    margin-top: 18px;
+  }
+
+  .portfolio-summary .summary-card {
+    padding: 16px;
+  }
+
+  .holdings-page > table {
+    min-width: 560px;
+  }
+
+  .holdings-page > table th {
+    padding: 0 12px;
+
+    font-size: 8px;
+  }
+
+  .holdings-page > table td {
+    height: 52px;
+
+    padding: 0 12px;
+
+    font-size: 10px;
+  }
+}

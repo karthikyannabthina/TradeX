@@ -5,11 +5,12 @@ export default function StockDetailPanel({
   stock,
   onClose,
 }) {
-  if (!stock) return null;
 
   // NEW: Buy / Sell modal state
   const [orderType, setOrderType] = useState(null);
   const [quantity, setQuantity] = useState(1);
+
+  if (!stock) return null;
 
   const ltp = Number(stock.ltp ?? 0);
 

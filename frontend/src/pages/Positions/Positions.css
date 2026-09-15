@@ -1,7 +1,193 @@
-﻿.positions-page{padding:20px}
-.day-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;margin:20px 0;box-shadow:var(--shadow-1)}
-.green{color:var(--success)}
-table{width:100%;background:transparent;border-collapse:collapse;border-radius:12px;overflow:hidden}
-th{background:rgba(255,255,255,0.02);padding:12px;text-align:left;color:var(--text-2)}
-td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-2)}
-tbody tr:hover{background:rgba(255,255,255,0.01)}
+﻿.positions-page {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  color: #e8edf5;
+}
+
+/* Header */
+
+.positions-page > h1 {
+  margin: 0;
+  color: #f1f5f9;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.positions-page > h1::after {
+  content: " Intraday positions";
+  margin-left: 8px;
+  color: #596678;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* Today's P&L */
+
+.day-card {
+  width: 100%;
+  min-height: 108px;
+  margin: 22px 0 18px;
+  padding: 18px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background: #0b1017;
+  border: 1px solid #1d2530;
+  border-radius: 7px;
+  box-shadow: none;
+}
+
+.day-card h3 {
+  margin: 0;
+  color: #69778b;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.day-card h2 {
+  margin: 9px 0 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.3px;
+}
+
+.positions-page .green {
+  color: #10b981;
+}
+
+.positions-page .red {
+  color: #ef5350;
+}
+
+/* Positions table */
+
+.positions-page > table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+
+  background: #0b1017;
+  border: 1px solid #1d2530;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.positions-page > table th {
+  height: 42px;
+  padding: 0 16px;
+
+  background: #0a0f15;
+  border-bottom: 1px solid #202833;
+
+  color: #69778b;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.positions-page > table td {
+  height: 58px;
+  padding: 0 16px;
+
+  border-bottom: 1px solid #18202a;
+
+  color: #8b97a8;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.positions-page > table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.positions-page > table tbody tr:hover {
+  background: #0e141c;
+}
+
+.positions-page > table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Stock */
+
+.positions-page > table td:first-child {
+  color: #edf2f8;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+/* Quantity */
+
+.positions-page > table td:nth-child(2) {
+  font-weight: 600;
+}
+
+/* Price */
+
+.positions-page > table td:nth-child(3),
+.positions-page > table td:nth-child(4) {
+  color: #a4afbe;
+}
+
+/* Mobile */
+
+@media (max-width: 800px) {
+  .positions-page {
+    overflow-x: hidden;
+  }
+
+  .positions-page > table {
+    display: block;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #2a3442 transparent;
+  }
+}
+
+@media (max-width: 520px) {
+  .positions-page > h1 {
+    font-size: 22px;
+  }
+
+  .positions-page > h1::after {
+    display: block;
+    margin: 5px 0 0;
+    font-size: 10px;
+  }
+
+  .day-card {
+    min-height: 94px;
+    margin-top: 18px;
+    padding: 16px;
+  }
+
+  .day-card h2 {
+    font-size: 20px;
+  }
+
+  .positions-page > table {
+    min-width: 560px;
+  }
+
+  .positions-page > table th {
+    padding: 0 12px;
+    font-size: 8px;
+  }
+
+  .positions-page > table td {
+    height: 52px;
+    padding: 0 12px;
+    font-size: 10px;
+  }
+}

@@ -6,44 +6,107 @@ import {
   FaChartLine,
   FaMoneyBill,
   FaUser,
+  FaChartBar,
 } from "react-icons/fa";
 import "./Sidebar.css";
+
+const navSections = [
+  {
+    title: "Overview",
+    items: [
+      {
+        to: "/",
+        label: "Dashboard",
+        icon: FaChartPie,
+        end: true,
+      },
+      {
+        to: "/markets",
+        label: "Markets",
+        icon: FaChartBar,
+      },
+    ],
+  },
+  {
+    title: "Portfolio",
+    items: [
+      {
+        to: "/holdings",
+        label: "Holdings",
+        icon: FaWallet,
+      },
+      {
+        to: "/positions",
+        label: "Positions",
+        icon: FaChartLine,
+      },
+    ],
+  },
+  {
+    title: "Trading",
+    items: [
+      {
+        to: "/orders",
+        label: "Orders",
+        icon: FaShoppingBag,
+      },
+      {
+        to: "/funds",
+        label: "Funds",
+        icon: FaMoneyBill,
+      },
+    ],
+  },
+  {
+    title: "Settings",
+    items: [
+      {
+        to: "/profile",
+        label: "Profile",
+        icon: FaUser,
+      },
+    ],
+  },
+];
 
 export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="brand">
-        <h3>Trade X</h3>
+        <span className="brand-mark">T</span>
+        <span className="brand-name">TradeX</span>
       </div>
 
       <nav className="side-nav">
-        <NavLink to="/" end>
-          <FaChartPie /> <span>Dashboard</span>
-        </NavLink>
+        {navSections.map((section) => (
+          <div className="nav-section" key={section.title}>
+            <p className="nav-section-title">{section.title}</p>
 
-        <NavLink to="/orders">
-          <FaShoppingBag /> <span>Orders</span>
-        </NavLink>
+            <div className="nav-section-items">
+              {section.items.map((item) => {
+                const Icon = item.icon;
 
-        <NavLink to="/holdings">
-          <FaWallet /> <span>Holdings</span>
-        </NavLink>
-
-        <NavLink to="/positions">
-          <FaChartLine /> <span>Positions</span>
-        </NavLink>
-
-        <NavLink to="/funds">
-          <FaMoneyBill /> <span>Funds</span>
-        </NavLink>
-
-        <NavLink to="/profile">
-          <FaUser /> <span>Profile</span>
-        </NavLink>
+                return (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    end={item.end}
+                    className={({ isActive }) =>
+                      isActive ? "active" : ""
+                    }
+                  >
+                    <Icon />
+                    <span>{item.label}</span>
+                  </NavLink>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </nav>
 
       <div className="side-footer">
-        <small className="p-muted">© 2026</small>
+        <small>TradeX v1.0</small>
       </div>
     </aside>
   );

@@ -1,307 +1,484 @@
-.profile-page{
-    padding:40px;
-    background:#f5f7fb;
-    min-height:100vh;
+/* =========================================================
+   TradeX — Profile
+   Premium dark fintech UI
+   ========================================================= */
+
+.profile-page {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  color: #e8edf5;
 }
 
-.profile-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:35px;
-    border-radius:24px;
-    background:linear-gradient(135deg,#387ed1,#5ea3ff);
-    color:#fff;
-    box-shadow:0 15px 35px rgba(56,126,209,.25);
-    margin-bottom:30px;
+/* =========================================================
+   PROFILE HEADER
+   ========================================================= */
+
+.profile-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  min-height: 138px;
+  padding: 24px 28px;
+  margin-bottom: 18px;
+
+  background: #0b1017;
+  border: 1px solid #1d2530;
+  border-radius: 7px;
 }
 
-.profile-left{
-    display:flex;
-    align-items:center;
-    gap:25px;
+.profile-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
 }
 
-.profile-image{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    border:5px solid #fff;
-    object-fit:cover;
-    box-shadow:0 10px 25px rgba(0,0,0,.25);
+.profile-info {
+  min-width: 0;
 }
 
-.profile-info h2{
-    font-size:36px;
-    margin-bottom:6px;
+.profile-info h2 {
+  margin: 0;
+
+  color: #f1f5f9;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
 }
 
-.designation{
-    font-size:18px;
-    opacity:.95;
-    margin-bottom:15px;
+.designation {
+  margin: 5px 0 11px;
+
+  color: #69778b;
+  font-size: 11px;
+  font-weight: 500;
 }
 
-.profile-tags{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
+.profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.profile-tags span{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    background:rgba(255,255,255,.18);
-    backdrop-filter:blur(10px);
-    padding:8px 16px;
-    border-radius:30px;
-    font-size:14px;
+.profile-tags span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  min-height: 25px;
+  padding: 0 9px;
+
+  background: #111821;
+  border: 1px solid #252e3a;
+  border-radius: 4px;
+
+  color: #9ba7b7;
+  font-size: 9px;
+  font-weight: 600;
 }
 
-.profile-description{
-    margin-top:18px;
-    max-width:520px;
-    line-height:1.7;
-    opacity:.95;
+.profile-tags svg {
+  font-size: 9px;
 }
 
-.edit-profile-btn{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:14px 24px;
-    background:#fff;
-    color:#387ed1;
-    border:none;
-    border-radius:12px;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
+.edit-profile-btn {
+  flex-shrink: 0;
+
+  height: 36px;
+  padding: 0 14px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  background: transparent;
+  border: 1px solid #293341;
+  border-radius: 6px;
+
+  color: #aab4c3;
+  font-size: 11px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
-.edit-profile-btn:hover{
-    transform:translateY(-4px);
-    box-shadow:0 12px 25px rgba(0,0,0,.2);
+.edit-profile-btn:hover {
+  background: #141b25;
+  border-color: #344154;
+  color: #ffffff;
 }
 
-.profile-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
-    margin-bottom:25px;
-}
-
-.card{
-    background:#fff;
-    border-radius:20px;
-    padding:28px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 30px rgba(0,0,0,.12);
-}
-
-.card h2{
-    margin-bottom:20px;
-    color:#1c1c1c;
-}
-
-.detail-item{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    padding:16px 0;
-    border-bottom:1px solid #eee;
-}
-
-.detail-item:last-child{
-    border:none;
-}
-
-.detail-icon{
-    width:48px;
-    height:48px;
-    border-radius:12px;
-    background:#edf5ff;
-    color:#387ed1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-}
-
-.detail-item span{
-    color:#888;
-    font-size:13px;
-}
-
-.detail-item h4{
-    margin-top:5px;
-    font-size:17px;
-}
-
-.stats-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-.stat-box{
-    background:linear-gradient(135deg,#387ed1,#5ea3ff);
-    color:#fff;
-    border-radius:18px;
-    padding:20px;
-    transition:.3s;
-}
-
-.stat-box:hover{
-    transform:scale(1.04);
-}
-
-.stat-box h3{
-    font-size:28px;
-    margin-top:10px;
-}
-
-.stat-box p{
-    opacity:.9;
-}
-
-.extra-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
-}
-
-.activity-item{
-    display:flex;
-    justify-content:space-between;
-    padding:15px 0;
-    border-bottom:1px solid #eee;
-}
-
-.activity-item:last-child{
-    border:none;
-}
-
-.activity-status{
-    color:#00c853;
-    font-weight:600;
-}
-
-.achievement{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:15px 0;
-}
-
-.achievement-icon{
-    width:50px;
-    height:50px;
-    background:#edf5ff;
-    color:#387ed1;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:20px;
-}
-
-@media(max-width:900px){
-
-.profile-header{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:30px;
-}
-
-.profile-left{
-    flex-direction:column;
-    align-items:flex-start;
-}
+/* =========================================================
+   PAGE GRIDS
+   ========================================================= */
 
 .profile-grid,
-.extra-grid{
-    grid-template-columns:1fr;
+.extra-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(320px, 0.65fr);
+
+  gap: 18px;
+
+  align-items: start;
 }
 
-.stats-grid{
-    grid-template-columns:1fr;
+.profile-grid {
+  margin-bottom: 18px;
 }
 
-.profile-image{
-    width:90px;
-    height:90px;
+/* =========================================================
+   COMMON CARD
+   ========================================================= */
+
+.profile-page .card {
+  width: 100%;
+  min-width: 0;
+
+  padding: 18px 20px;
+
+  background: #0b1017;
+
+  border: 1px solid #1d2530;
+  border-radius: 7px;
+
+  box-shadow: none;
+
+  overflow: hidden;
 }
 
+.profile-page .card:hover {
+  transform: none;
+  box-shadow: none;
 }
 
-.stat-icon{
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
 
-width:55px;
+.profile-page .card > h2 {
+  margin: 0 0 10px;
+  padding: 0 0 12px;
 
-height:55px;
+  color: #edf2f8;
 
-display:flex;
+  border-bottom: 1px solid #1d2530;
 
-align-items:center;
-
-justify-content:center;
-
-background:rgba(255,255,255,.2);
-
-border-radius:15px;
-
-font-size:22px;
-
-margin-bottom:15px;
-
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
 }
 
-.stat-box{
+/* =========================================================
+   ACCOUNT DETAILS
+   ========================================================= */
 
-background:linear-gradient(135deg,#387ed1,#4e9bff);
+.profile-page .detail-item {
+  width: 100%;
 
-padding:22px;
+  display: flex;
+  align-items: center;
 
-border-radius:18px;
+  gap: 12px;
 
-color:white;
+  min-height: 48px;
+  padding: 5px 0;
 
-transition:.35s;
-
-cursor:pointer;
-
+  border: none !important;
 }
 
-.stat-box:hover{
+.profile-page .detail-icon {
+  width: 32px;
+  height: 32px;
 
-transform:translateY(-8px);
+  flex-shrink: 0;
 
-box-shadow:0 20px 35px rgba(56,126,209,.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  background: #111821;
+
+  border: 1px solid #252e3a;
+  border-radius: 6px;
+
+  color: #7faeea;
+
+  font-size: 12px;
 }
 
-.stat-box p{
-
-opacity:.9;
-
-margin-bottom:10px;
-
-font-size:15px;
-
+.profile-page .detail-item > div {
+  min-width: 0;
 }
 
-.stat-box h3{
+.profile-page .detail-item span {
+  display: block;
 
-font-size:30px;
+  margin: 0;
 
-font-weight:700;
+  color: #69778b;
 
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.profile-page .detail-item h4 {
+  margin: 4px 0 0;
+
+  color: #dce5ef;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   TRADING STATISTICS
+   ========================================================= */
+
+.profile-page .stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  padding: 0;
+}
+
+.profile-page .stat-box {
+  min-height: 96px;
+
+  padding: 13px;
+
+  background: #0e141c;
+
+  border: 1px solid #202a35;
+  border-radius: 6px;
+
+  color: #e8edf5;
+
+  cursor: default;
+}
+
+.profile-page .stat-box:hover {
+  background: #111821;
+  border-color: #293545;
+
+  transform: none;
+  box-shadow: none;
+}
+
+.profile-page .stat-icon {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 8px;
+
+  background: #151e29;
+
+  border: 1px solid #273241;
+  border-radius: 6px;
+
+  color: #7faeea;
+
+  font-size: 11px;
+}
+
+.profile-page .stat-box p {
+  margin: 0 0 6px;
+
+  color: #69778b;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.profile-page .stat-box h3 {
+  margin: 0;
+
+  color: #edf2f8;
+
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* =========================================================
+   ACHIEVEMENTS
+   ========================================================= */
+
+.profile-page .achievement {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 52px;
+  padding: 6px 0;
+
+  border: none !important;
+}
+
+.profile-page .achievement-icon {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #111821;
+
+  border: 1px solid #252e3a;
+  border-radius: 6px;
+
+  color: #7faeea;
+
+  font-size: 12px;
+}
+
+.profile-page .achievement h4 {
+  margin: 0;
+
+  color: #dce5ef;
+
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.profile-page .achievement p {
+  margin: 3px 0 0;
+
+  color: #69778b;
+
+  font-size: 9px;
+  font-weight: 500;
+}
+
+/* =========================================================
+   RECENT ACTIVITY
+   ========================================================= */
+
+.profile-page .activity-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  min-height: 52px;
+  padding: 6px 0;
+
+  border: none !important;
+}
+
+.profile-page .activity-item h4 {
+  margin: 0;
+
+  color: #dce5ef;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.profile-page .activity-item small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #69778b;
+
+  font-size: 9px;
+}
+
+.profile-page .activity-status {
+  flex-shrink: 0;
+
+  color: #10b981;
+
+  font-size: 10px;
+  font-weight: 650;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .profile-grid,
+  .extra-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .profile-header {
+    min-height: auto;
+
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding: 20px;
+  }
+
+  .profile-left {
+    align-items: flex-start;
+  }
+
+  .edit-profile-btn {
+    width: 100%;
+  }
+
+  .profile-page .stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .profile-header {
+    padding: 18px;
+  }
+
+  .profile-info h2 {
+    font-size: 21px;
+  }
+
+  .profile-page .card {
+    padding: 16px;
+  }
+
+  .profile-page .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-page .stat-box {
+    min-height: 88px;
+  }
 }

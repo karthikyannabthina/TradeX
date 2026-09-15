@@ -1,16 +1,15 @@
 .navbar {
-  height: 68px;
+  height: 64px;
   width: 100%;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 
-  padding: 0 32px;
+  padding: 0 28px;
 
-  background: rgba(5, 7, 11, 0.82);
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+  background: #0a0e14;
+  border-bottom: 1px solid #1b222d;
 
   position: sticky;
   top: 0;
@@ -24,52 +23,62 @@
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 }
 
+/* =========================
+   SEARCH
+========================= */
+
 .navbar-search input {
-  width: 265px;
-  height: 44px;
+  width: 280px;
+  height: 38px;
 
-  padding: 0 16px;
+  padding: 0 14px;
 
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 11px;
+  border: 1px solid #202733;
+  border-radius: 7px;
 
   outline: none;
 
-  background: #0a0d12;
+  background: #0d1219;
+  color: #e8edf5;
 
-  color: #e8eef8;
+  font-size: 13px;
 
-  font-size: 14px;
-
-  transition: border 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
 
 .navbar-search input::placeholder {
-  color: #697487;
+  color: #667085;
+}
+
+.navbar-search input:hover {
+  border-color: #293241;
 }
 
 .navbar-search input:focus {
-  border-color: rgba(56,126,209,0.7);
-
-  box-shadow:
-    0 0 0 3px rgba(56,126,209,0.08);
+  background: #0f141c;
+  border-color: #387ed1;
 }
+
+/* =========================
+   NOTIFICATIONS
+========================= */
 
 .notification-btn {
   position: relative;
 
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
 
-  border: none;
-  border-radius: 11px;
+  border: 1px solid transparent;
+  border-radius: 7px;
 
   background: transparent;
-
-  color: #9aa7ba;
+  color: #8994a6;
 
   cursor: pointer;
 
@@ -77,104 +86,138 @@
   align-items: center;
   justify-content: center;
 
-  font-size: 17px;
+  font-size: 15px;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .notification-btn:hover {
-  background: rgba(255,255,255,0.04);
-  color: #fff;
+  background: #11161e;
+  color: #e8edf5;
 }
 
 .notification-btn span {
   position: absolute;
 
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 
-  top: 9px;
-  right: 9px;
+  top: 7px;
+  right: 7px;
 
   border-radius: 50%;
 
   background: #ef4444;
-
-  border: 2px solid #05070b;
+  border: 1px solid #0a0e14;
 }
+
+/* =========================
+   USER
+========================= */
 
 .user-menu {
   display: flex;
   align-items: center;
-  gap: 11px;
 
-  padding-left: 8px;
+  gap: 10px;
+
+  padding-left: 14px;
+
+  border-left: 1px solid #202733;
 }
 
 .user-avatar {
-  width: 38px;
-  height: 38px;
-
-  border-radius: 50%;
+  width: 34px;
+  height: 34px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background:
-    linear-gradient(
-      135deg,
-      #387ed1,
-      #7c3aed
-    );
+  border-radius: 50%;
 
-  color: white;
+  background: #1b2738;
+  color: #8db9f5;
 
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .user-info {
   display: flex;
   flex-direction: column;
+
   line-height: 1.2;
 }
 
 .user-info strong {
-  color: #e8eef8;
+  color: #e8edf5;
+
   font-size: 13px;
+  font-weight: 600;
 }
 
 .user-info small {
   margin-top: 3px;
-  color: #6e7b90;
-  font-size: 11px;
+
+  color: #667085;
+
+  font-size: 10px;
 }
+
+/* =========================
+   BUTTONS
+========================= */
 
 .logout-btn,
 .login-btn {
-  border: none;
+  border: 1px solid #263142;
 
-  background: #387ed1;
-  color: white;
+  background: transparent;
+  color: #aab4c3;
 
-  padding: 10px 16px;
+  padding: 8px 13px;
 
-  border-radius: 9px;
+  border-radius: 6px;
 
+  font-size: 12px;
   font-weight: 600;
 
   cursor: pointer;
-
   text-decoration: none;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .logout-btn:hover,
 .login-btn:hover {
-  background: #438df5;
+  background: #141b25;
+  border-color: #344154;
+  color: #ffffff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0 18px;
+  }
+
+  .navbar-search input {
+    width: 220px;
+  }
 }
 
 @media (max-width: 700px) {
   .navbar {
-    padding: 0 16px;
+    padding: 0 14px;
   }
 
   .navbar-search {
@@ -183,5 +226,13 @@
 
   .user-info {
     display: none;
+  }
+
+  .navbar-right {
+    gap: 8px;
+  }
+
+  .user-menu {
+    padding-left: 8px;
   }
 }

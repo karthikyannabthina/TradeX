@@ -8,7 +8,8 @@
   width: 100%;
   min-height: 100vh;
   display: flex;
-  background: #05070b;
+  background: #070a0f;
+  color: #e8edf5;
 }
 
 .app-main {
@@ -17,34 +18,33 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background:
-    radial-gradient(
-      circle at 75% 0%,
-      rgba(56, 126, 209, 0.055),
-      transparent 30%
-    ),
-    #05070b;
+  background: #070a0f;
 }
 
 .main-content {
   width: 100%;
-  max-width: 100%;
   flex: 1;
   min-width: 0;
-
-  box-sizing: border-box;
-
-  padding: 28px 32px 50px;
+  padding: 28px 32px 48px;
 }
 
+/* Large screens */
 @media (max-width: 1200px) {
   .main-content {
-    padding: 28px;
+    padding: 24px 28px 44px;
   }
 }
 
+/* Tablets */
 @media (max-width: 900px) {
   .main-content {
-    padding: 20px 16px 40px;
+    padding: 20px 18px 36px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .main-content {
+    padding: 16px 14px 30px;
   }
 }

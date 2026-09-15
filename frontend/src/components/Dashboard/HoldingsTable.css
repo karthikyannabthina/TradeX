@@ -1,25 +1,193 @@
-.holdings-table{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:14px;box-shadow:var(--shadow-1);color:var(--text)}
-.holdings-table h2{margin-bottom:12px;color:var(--text)}
+/* =========================================================
+   HOLDINGS TABLE
+========================================================= */
 
-table{width:100%;border-collapse:collapse}
+.holdings-table {
+  width: 100%;
 
-th{text-align:left;padding:12px;color:var(--text-2);background:rgba(255,255,255,0.02)}
+  padding: 0 20px 12px;
 
-td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-2)}
+  background: transparent;
 
-tbody tr:hover{background:rgba(255,255,255,0.01);cursor:pointer}
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 
-.green{color:var(--success);font-weight:700}
-.red{color:var(--danger);font-weight:700}
+  color: #e8edf5;
 
-/* Responsive: transform table rows into cards on small screens */
+  overflow-x: auto;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.holdings-table table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 560px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.holdings-table th {
+  padding: 11px 10px;
+
+  border-bottom: 1px solid #202833;
+
+  color: #697589;
+
+  background: transparent;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.07em;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.holdings-table th:first-child,
+.holdings-table td:first-child {
+  padding-left: 0;
+}
+
+.holdings-table th:last-child,
+.holdings-table td:last-child {
+  padding-right: 0;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.holdings-table td {
+  height: 54px;
+
+  padding: 10px;
+
+  border-bottom: 1px solid #18202a;
+
+  color: #8b97a8;
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+.holdings-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.holdings-table tbody tr:hover {
+  background: #0e141c;
+
+  cursor: default;
+}
+
+.holdings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   STOCK SYMBOL
+========================================================= */
+
+.holdings-table td strong {
+  color: #e7edf5;
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
+
+/* =========================================================
+   P&L
+========================================================= */
+
+.holdings-table .green {
+  color: #10b981;
+
+  font-weight: 650;
+}
+
+.holdings-table .red {
+  color: #ef5350;
+
+  font-weight: 650;
+}
+
+.holdings-table td small {
+  color: inherit;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   LOADING / EMPTY
+========================================================= */
+
+.holdings-table > p {
+  margin: 0;
+
+  padding: 28px 0;
+
+  color: #718096;
+
+  text-align: center;
+
+  font-size: 11px;
+}
+
+.holdings-table > p.red {
+  color: #ef5350;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media (max-width: 720px) {
-  .holdings-table { padding: 12px; }
-  .holdings-table table, .holdings-table thead, .holdings-table tbody, .holdings-table th, .holdings-table td, .holdings-table tr { display: block; width: 100%; }
-  .holdings-table thead { display: none; }
-  .holdings-table tbody { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  .holdings-table tbody tr { background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.02); }
-  .holdings-table td { display: flex; justify-content: space-between; padding: 6px 0; border: none; }
-  .holdings-table td .label { color: var(--muted); font-size: 12px; }
-  .holdings-table td .value { color: var(--text); font-weight:700 }
+  .holdings-table {
+    padding: 0 16px 12px;
+
+    overflow-x: auto;
+  }
+
+  .holdings-table table {
+    min-width: 540px;
+  }
+
+  .holdings-table th {
+    padding: 10px 8px;
+
+    font-size: 8px;
+  }
+
+  .holdings-table td {
+    height: 50px;
+
+    padding: 9px 8px;
+
+    font-size: 10px;
+  }
+
+  .holdings-table td strong {
+    font-size: 11px;
+  }
 }

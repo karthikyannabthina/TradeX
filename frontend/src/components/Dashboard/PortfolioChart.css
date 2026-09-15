@@ -1,12 +1,12 @@
 /* =========================================================
-   PORTFOLIO / STOCK CHART
+   PORTFOLIO CHART
 ========================================================= */
 
 .portfolio-card {
   width: 100%;
   min-width: 0;
   margin: 0;
-  padding: 0 0 10px;
+  padding: 0 0 8px;
 
   background: transparent;
 
@@ -26,11 +26,11 @@
 
   gap: 24px;
 
-  min-height: 106px;
+  min-height: 104px;
 
-  padding: 17px 20px 13px;
+  padding: 18px 22px 14px;
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+  border-bottom: 1px solid #18202a;
 }
 
 .stock-info {
@@ -39,7 +39,7 @@
 
 
 /* =========================================================
-   STOCK TITLE ROW
+   STOCK TITLE
 ========================================================= */
 
 .stock-title-row {
@@ -48,7 +48,7 @@
 
   gap: 8px;
 
-  margin-bottom: 8px;
+  margin-bottom: 9px;
 }
 
 .stock-title-row select {
@@ -66,16 +66,13 @@
   color: #f1f5f9;
 
   font-size: 14px;
-  font-weight: 750;
+  font-weight: 700;
   line-height: 1.2;
 
   cursor: pointer;
 }
 
-.stock-title-row select:hover {
-  color: #60a5fa;
-}
-
+.stock-title-row select:hover,
 .stock-title-row select:focus {
   color: #60a5fa;
 }
@@ -94,27 +91,26 @@
   display: inline-flex;
   align-items: center;
 
-  height: 21px;
+  height: 20px;
 
   padding: 0 7px;
 
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid #202a36;
+  border-radius: 4px;
 
-  border-radius: 5px;
-
-  background: rgba(255, 255, 255, 0.018);
+  background: #0e141c;
 
   color: #718198;
 
   font-size: 8px;
   font-weight: 700;
 
-  letter-spacing: 0.45px;
+  letter-spacing: 0.04em;
 }
 
 
 /* =========================================================
-   LIVE / OFFLINE STATUS
+   LIVE STATUS
 ========================================================= */
 
 .chart-market-status {
@@ -124,9 +120,9 @@
   gap: 5px;
 
   font-size: 8px;
-  font-weight: 750;
+  font-weight: 700;
 
-  letter-spacing: 0.55px;
+  letter-spacing: 0.05em;
 }
 
 .chart-market-status.live {
@@ -134,7 +130,7 @@
 }
 
 .chart-market-status.offline {
-  color: #64748b;
+  color: #667085;
 }
 
 .status-dot {
@@ -154,7 +150,7 @@
 
 
 /* =========================================================
-   PRICE ROW
+   PRICE
 ========================================================= */
 
 .stock-price-row {
@@ -169,8 +165,8 @@
 .stock-price {
   color: #f8fafc;
 
-  font-size: 23px;
-  font-weight: 750;
+  font-size: 24px;
+  font-weight: 700;
 
   line-height: 1;
 
@@ -181,7 +177,7 @@
 
 .stock-change {
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 650;
 
   white-space: nowrap;
 }
@@ -209,25 +205,24 @@
 
   padding: 3px;
 
-  border: 1px solid rgba(255, 255, 255, 0.045);
+  border: 1px solid #1b2430;
+  border-radius: 6px;
 
-  border-radius: 8px;
-
-  background: rgba(255, 255, 255, 0.025);
+  background: #0a0f15;
 }
 
 .chart-ranges button {
   min-width: 34px;
-  height: 28px;
+  height: 27px;
 
   padding: 0 7px;
 
   border: 0;
-  border-radius: 5px;
+  border-radius: 4px;
 
   background: transparent;
 
-  color: #718198;
+  color: #687589;
 
   font-size: 9px;
   font-weight: 700;
@@ -235,24 +230,20 @@
   cursor: pointer;
 
   transition:
-    background 0.16s ease,
-    color 0.16s ease,
-    box-shadow 0.16s ease;
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .chart-ranges button:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: #111821;
 
-  color: #dbe5f0;
+  color: #dce5ef;
 }
 
 .chart-ranges button.active {
-  background: #14253c;
+  background: #172538;
 
-  color: #4b96f7;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(56, 126, 209, 0.20);
+  color: #5a9bf3;
 }
 
 
@@ -274,9 +265,6 @@
   height: 330px;
 }
 
-
-/* Lightweight Charts canvas */
-
 .trading-chart canvas {
   display: block;
 }
@@ -297,12 +285,12 @@
   align-items: center;
   justify-content: center;
 
-  color: #64748b;
+  color: #687589;
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
 
-  background: rgba(5, 9, 15, 0.38);
+  background: rgba(7, 10, 15, 0.45);
 
   pointer-events: none;
 }
@@ -315,20 +303,16 @@
 
 
 /* =========================================================
-   DESKTOP REFINEMENT
+   DESKTOP
 ========================================================= */
 
 @media (min-width: 1000px) {
-
   .stock-chart-header {
-    padding-left: 26px;
-    padding-right: 26px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
-  .chart-wrapper {
-    height: 350px;
-  }
-
+  .chart-wrapper,
   .trading-chart {
     height: 350px;
   }
@@ -340,7 +324,6 @@
 ========================================================= */
 
 @media (max-width: 900px) {
-
   .stock-chart-header {
     align-items: center;
 
@@ -362,7 +345,6 @@
 ========================================================= */
 
 @media (max-width: 700px) {
-
   .stock-chart-header {
     flex-direction: column;
 
@@ -407,7 +389,6 @@
 ========================================================= */
 
 @media (max-width: 420px) {
-
   .stock-title-row {
     gap: 6px;
   }

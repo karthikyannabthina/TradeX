@@ -1,22 +1,256 @@
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+/* =========================================================
+   TradeX — Login
+   Premium dark fintech authentication UI
+   ========================================================= */
 
-.auth-container{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:28px}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-.auth-card{width:420px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:34px;border-radius:14px;box-shadow:var(--shadow-1);color:var(--text-2)}
+/* =========================================================
+   PAGE
+   ========================================================= */
 
-.auth-card h1{text-align:center;color:var(--accent);margin-bottom:6px}
-.auth-card h2{text-align:center;margin-bottom:20px;color:var(--text)}
+.auth-container {
+  width: 100%;
+  min-height: 100vh;
 
-.form-group{display:flex;flex-direction:column;margin-bottom:16px}
-.form-group label{margin-bottom:8px;font-weight:600;color:var(--text-2)}
-.form-group input{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)}
-.form-group input:focus{outline:none;box-shadow:0 6px 20px rgba(56,126,209,0.08);border-color:rgba(56,126,209,0.2)}
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.auth-btn{width:100%;padding:12px;border-radius:10px;border:0;background:var(--accent);color:white;font-weight:700;cursor:pointer}
-.auth-btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(56,126,209,0.14)}
+  padding: 32px;
 
-.auth-card p{text-align:center;margin-top:14px;color:var(--muted)}
-.auth-card a{color:var(--accent);text-decoration:none;font-weight:600}
+  background: #070a0f;
 
-@media (max-width:480px){.auth-card{width:100%}}
+  color: #e8edf5;
+}
+
+/* =========================================================
+   LOGIN CARD
+   ========================================================= */
+
+.auth-card {
+  width: 100%;
+  max-width: 410px;
+
+  padding: 32px;
+
+  background: #0b1017;
+
+  border: 1px solid #1d2530;
+  border-radius: 8px;
+
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+
+  color: #e8edf5;
+}
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.auth-card h1 {
+  margin: 0;
+
+  color: #f1f5f9;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  letter-spacing: -0.4px;
+
+  text-align: left;
+}
+
+.auth-card h1::after {
+  content: "TRADING PLATFORM";
+
+  display: block;
+
+  margin-top: 5px;
+
+  color: #596678;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.auth-card h2 {
+  margin: 30px 0 22px;
+
+  color: #edf2f8;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  letter-spacing: -0.2px;
+
+  text-align: left;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 17px;
+}
+
+.form-group label {
+  margin-bottom: 7px;
+
+  color: #8b97a8;
+
+  font-size: 10px;
+  font-weight: 650;
+
+  letter-spacing: 0.02em;
+}
+
+.form-group input {
+  width: 100%;
+  height: 42px;
+
+  padding: 0 12px;
+
+  background: #0e141c;
+
+  border: 1px solid #252e3a;
+  border-radius: 6px;
+
+  outline: none;
+
+  color: #e8edf5;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.form-group input::placeholder {
+  color: #586577;
+}
+
+.form-group input:hover {
+  border-color: #303b49;
+}
+
+.form-group input:focus {
+  background: #101720;
+
+  border-color: #387ed1;
+
+  box-shadow: 0 0 0 2px rgba(56, 126, 209, 0.08);
+}
+
+/* =========================================================
+   LOGIN BUTTON
+   ========================================================= */
+
+.auth-btn {
+  width: 100%;
+  height: 42px;
+
+  margin-top: 4px;
+
+  border: 1px solid #387ed1;
+  border-radius: 6px;
+
+  background: #387ed1;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.auth-btn:hover:not(:disabled) {
+  background: #438df5;
+  border-color: #438df5;
+
+  transform: translateY(-1px);
+}
+
+.auth-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.auth-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.auth-card > p {
+  margin: 18px 0 0;
+
+  color: #69778b;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+.auth-card a {
+  color: #6fa8ed;
+
+  text-decoration: none;
+
+  font-weight: 650;
+}
+
+.auth-card a:hover {
+  color: #8db9f5;
+  text-decoration: underline;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .auth-container {
+    padding: 18px;
+  }
+
+  .auth-card {
+    padding: 24px 20px;
+  }
+
+  .auth-card h1 {
+    font-size: 21px;
+  }
+
+  .auth-card h2 {
+    margin-top: 26px;
+  }
+}
