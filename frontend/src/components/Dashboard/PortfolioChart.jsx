@@ -7,11 +7,11 @@ import {
 
 import socket from "../../socket";
 import useMarketData from "../../context/useMarketData";
+import { API_BASE_URL } from "../../utils/constants";
 
 import "./PortfolioChart.css";
 
-const API_URL =
-  "http://localhost:5000/api/v1/market";
+const API_URL = `${API_BASE_URL}/market`;
 
 const STOCKS = [
   "TCS",

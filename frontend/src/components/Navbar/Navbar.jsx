@@ -1,14 +1,22 @@
 import { Link } from "react-router-dom";
-import { FaBell } from "react-icons/fa";
-
+import { FaBell, FaBars } from "react-icons/fa";
 import "./Navbar.css";
 import { useAuth } from "../../context/AuthContext";
 
-export default function Navbar() {
+export default function Navbar({ onMenuClick }) {
   const { user, logout } = useAuth();
 
   return (
     <nav className="navbar">
+
+      {/* Mobile menu button */}
+      <button
+        className="mobile-menu-btn"
+        onClick={onMenuClick}
+        aria-label="Open navigation"
+      >
+        <FaBars />
+      </button>
 
       <div className="navbar-spacer" />
 
@@ -36,13 +44,8 @@ export default function Navbar() {
             </div>
 
             <div className="user-info">
-              <strong>
-                {user.name || "User"}
-              </strong>
-
-              <small>
-                Investor
-              </small>
+              <strong>{user.name || "User"}</strong>
+              <small>Investor</small>
             </div>
 
             <button
@@ -63,7 +66,6 @@ export default function Navbar() {
         )}
 
       </div>
-
     </nav>
   );
 }

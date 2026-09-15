@@ -1,26 +1,46 @@
-:root{
-  --bg: #05080d;
-  --card: #0b121d;
-  --surface: #0b121d;
+:root {
+  --bg: #070a0f;
+  --card: #0b1017;
+  --surface: #0e141c;
 
-  --muted: #71839b;
-  --text: #e8eef6;
-  --text-2: #a8b7ca;
+  --border: #1d2530;
+  --border-soft: #18202a;
+
+  --muted: #69778b;
+  --text: #edf2f8;
+  --text-2: #a8b4c3;
 
   --accent: #387ed1;
-  --accent-2: #6366f1;
+  --accent-hover: #438df5;
 
-  --glass: rgba(255,255,255,0.025);
+  --success: #10b981;
+  --danger: #ef5350;
 
-  --success: #16c784;
-  --danger: #ff5b6e;
+  --radius: 7px;
 
-  --radius: 14px;
-
-  --shadow-1:
-    0 18px 45px rgba(0,0,0,0.20);
+  --shadow-1: 0 18px 45px rgba(0, 0, 0, 0.25);
 }
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
 body {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
   margin: 0;
 
   font-family:
@@ -32,11 +52,96 @@ body {
     "Segoe UI",
     sans-serif;
 
-  background: #05080d;
-
+  background: var(--bg);
   color: var(--text);
 
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   line-height: 1.45;
+
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+/* =========================================================
+   IMAGES / MEDIA
+   ========================================================= */
+
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+table {
+  max-width: 100%;
+}
+
+/* =========================================================
+   MOBILE FOUNDATION
+   ========================================================= */
+
+@media (max-width: 900px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 360px) {
+  body {
+    min-width: 0;
+  }
 }

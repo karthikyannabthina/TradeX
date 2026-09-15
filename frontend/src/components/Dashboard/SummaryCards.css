@@ -13,8 +13,6 @@
 }
 
 .summary-card {
-  position: relative;
-
   min-width: 0;
   min-height: 118px;
 
@@ -36,9 +34,9 @@
 }
 
 
-/* =========================
+/* =========================================================
    TITLE
-========================= */
+========================================================= */
 
 .summary-card h4 {
   margin: 0;
@@ -49,14 +47,13 @@
   font-weight: 700;
 
   letter-spacing: 0.08em;
-
   text-transform: uppercase;
 }
 
 
-/* =========================
+/* =========================================================
    VALUE
-========================= */
+========================================================= */
 
 .summary-card h2 {
   margin: 14px 0 7px;
@@ -67,14 +64,13 @@
   line-height: 1;
 
   font-weight: 700;
-
   letter-spacing: -0.6px;
 }
 
 
-/* =========================
+/* =========================================================
    CHANGE
-========================= */
+========================================================= */
 
 .summary-card p {
   min-height: 15px;
@@ -88,13 +84,13 @@
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 800px) {
   .summary-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .summary-card:nth-child(2) {
@@ -104,27 +100,83 @@
   .summary-card:nth-child(-n + 2) {
     border-bottom: 1px solid #1d2530;
   }
+
+  .summary-card:nth-child(3) {
+    border-right: 1px solid #1d2530;
+  }
+
+  .summary-card:nth-child(4) {
+    border-right: none;
+  }
 }
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 600px) {
   .summary-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    border-radius: 7px;
   }
 
   .summary-card {
-    min-height: 94px;
-
-    padding: 17px 18px;
-
-    border-right: none;
-    border-bottom: 1px solid #1d2530;
+    min-height: 88px;
+    padding: 15px 14px;
   }
 
-  .summary-card:last-child {
+  .summary-card:nth-child(2) {
+    border-right: none;
+  }
+
+  .summary-card:nth-child(3) {
+    border-right: 1px solid #1d2530;
     border-bottom: none;
   }
 
+  .summary-card:nth-child(4) {
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .summary-card h4 {
+    font-size: 8px;
+    letter-spacing: 0.06em;
+  }
+
   .summary-card h2 {
-    font-size: 21px;
+    margin-top: 10px;
+    margin-bottom: 6px;
+
+    font-size: 17px;
+    letter-spacing: -0.3px;
+
+    white-space: nowrap;
+  }
+
+  .summary-card p {
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .summary-card {
+    min-height: 84px;
+    padding: 14px 12px;
+  }
+
+  .summary-card h2 {
+    font-size: 15px;
+  }
+
+  .summary-card h4 {
+    font-size: 7px;
   }
 }
