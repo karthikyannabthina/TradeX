@@ -1,360 +1,740 @@
-TradeX
 
-A full-stack trading platform inspired by modern stock-trading applications such as Zerodha/Kite.
+# TradeX
 
-TradeX is a portfolio project focused on building a realistic, production-style trading application with a React frontend, Node.js backend, real-time market data, authentication, portfolio management, and scalable backend architecture.
+> A production-style full-stack trading platform built with the MERN stack, real-time market data, and modular backend architecture.
 
-Status: Active development
+TradeX is a portfolio project inspired by modern stock-trading platforms.
 
-🚀 Features
+The project focuses on building a realistic trading system rather than only a frontend interface. It includes authentication, market data, order execution, portfolio management, real-time communication, Redis caching, database transactions, validation, logging, and API documentation.
 
-User authentication and authorization
+**Status:** 🚧 Active Development
 
-JWT-based access and refresh token flow
+---
 
-Stock search and market overview
+## 🚀 Overview
 
-Real-time market price updates
+TradeX simulates the core workflow of a modern trading platform:
 
-Interactive stock/portfolio charts
+```text
+User
+  ↓
+React Trading Dashboard
+  ↓
+Search Stock → View Market Data → Place Order
+  ↓
+Node.js / Express API
+  ↓
+Order Processing
+  ↓
+Portfolio / Holdings / Funds
+  ↓
+MongoDB + Redis
+````
 
-Watchlist management
+The current development environment uses simulated market data to test the complete trading workflow.
 
-Holdings and positions
+---
 
-Order management
+## ✨ Features
 
-Portfolio tracking
+### Trading
 
-Funds and account information
+* Stock search
+* Market overview
+* Real-time market price updates
+* Interactive candlestick charts
+* Market BUY / SELL orders
+* Order validation
+* Order execution workflow
+* Order history
 
-RESTful APIs
+### Portfolio
 
-WebSocket-based real-time communication
+* Holdings management
+* Portfolio value tracking
+* Available funds
+* Profit & Loss tracking
+* Portfolio performance snapshots
+* Account balance updates
 
-Redis integration
+### Authentication
 
-MongoDB database
+* User registration
+* User login
+* JWT-based authentication
+* Access-token and refresh-token flow
+* Protected API routes
+* Authorization middleware
+* Session lifecycle management
 
-Request validation and centralized error handling
+### Backend
 
-Rate limiting and request logging
+* RESTful APIs
+* Modular backend architecture
+* Business-logic separation
+* MongoDB persistence
+* Redis market-state caching
+* WebSocket communication
+* Request validation
+* Centralized error handling
+* Rate limiting
+* Request logging
+* Swagger / OpenAPI documentation
 
-API documentation with Swagger/OpenAPI
+---
 
-🏗️ Architecture
+# 🏗️ System Architecture
 
-TradeX
-│
-├── frontend/                 # React + Vite frontend
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── layouts/
-│   │   ├── context/
-│   │   ├── services/
-│   │   └── utils/
-│   ├── package.json
-│   └── ...
-│
-├── backend/                  # Node.js + Express backend
-│   ├── src/
-│   │   ├── config/
-│   │   ├── constants/
-│   │   ├── controllers/
-│   │   ├── middlewares/
-│   │   ├── modules/
-│   │   ├── services/
-│   │   ├── jobs/
-│   │   └── ...
-│   ├── package.json
-│   └── ...
-│
-├── .gitignore
-└── README.md
+``
+                         ┌──────────────────────┐
+                         │      React UI        │
+                         │      TradeX Web      │
+                         └──────────┬───────────┘
+                                    │
+                     ┌──────────────┴──────────────┐
+                     │                             │
+                  REST API                    WebSocket
+                     │                             │
+                     ▼                             ▼
+          ┌────────────────────────────────────────────┐
+          │           Node.js / Express API            │
+          │                                            │
+          │  Authentication                            │
+          │  Order Management                          │
+          │  Portfolio Management                      │
+          │  Market Data                               │
+          │  Validation                                │
+          │  Error Handling                            │
+          └───────────────────┬────────────────────────┘
+                              │
+                ┌─────────────┼──────────────┐
+                │             │              │
+                ▼             ▼              ▼
+            MongoDB         Redis        Socket.IO
+                │             │
+                ▼             ▼
+          Persistent      Cached Market
+             Data            State
+```
 
-🛠️ Tech Stack
+---
 
-Frontend
+# 🔄 Application Flow
 
-React
+TradeX separates frontend presentation, API communication, business logic, and data persistence.
 
-Vite
-
-JavaScript
-
-Axios
-
-Socket.IO Client
-
-Lightweight Charts
-
-CSS
-
-Backend
-
-Node.js
-
-Express.js
-
-MongoDB
-
-Redis
-
-Socket.IO
-
-JWT
-
-REST APIs
-
-Swagger / OpenAPI
-
-Development & Infrastructure
-
-Git & GitHub
-
-Docker
-
-VS Code
-
-Postman
-
-🔄 Application Flow
-
+```text
 User
   │
   ▼
 React Frontend
   │
-  ├── REST API ──────► Node.js / Express
-  │                         │
-  │                         ├── Authentication
-  │                         ├── Business Logic
-  │                         ├── Portfolio
-  │                         ├── Orders
-  │                         └── Market Data
+  ├────────────── REST API ──────────────┐
+  │                                     │
+  │                                     ▼
+  │                              Node.js / Express
+  │                                     │
+  │                              ┌──────┴──────┐
+  │                              │             │
+  │                              ▼             ▼
+  │                         Business       Validation
+  │                          Logic
+  │                              │
+  │                     ┌────────┼────────┐
+  │                     │        │        │
+  │                     ▼        ▼        ▼
+  │                  MongoDB   Redis   Services
   │
-  └── WebSocket ─────► Socket.IO
-                            │
-                            ▼
-                       Real-time Updates
-                            │
-                            ▼
-                    React Dashboard
+  └──────────── WebSocket ───────► Socket.IO
+                                      │
+                                      ▼
+                                Live Market Updates
+```
 
-📊 Real-Time Market Data
+---
 
-TradeX uses WebSockets to deliver live market updates to the frontend.
+# 📦 Order Execution
 
-Market Simulator / Data Source
-            │
-            ▼
-       Backend Server
-            │
-        Socket.IO
-            │
-            ▼
-       React Frontend
-            │
-            ▼
-     Live Market UI
+One of the main engineering workflows in TradeX is order execution.
 
-The current development environment uses simulated market data for realistic frontend and backend testing.
+```text
+User places order
+       │
+       ▼
+React Frontend
+       │
+       ▼
+POST /orders
+       │
+       ▼
+Authentication
+       │
+       ▼
+Request Validation
+       │
+       ▼
+Order Service
+       │
+       ├── Validate stock
+       │
+       ├── Read current market price
+       │
+       ├── Validate funds / holdings
+       │
+       ├── Execute BUY / SELL
+       │
+       └── Update portfolio
+       │
+       ▼
+MongoDB Transaction
+       │
+       ├── Account
+       ├── Holdings
+       ├── Order
+       └── Performance Snapshot
+       │
+       ▼
+Updated Portfolio
+```
 
-🔐 Authentication
+The order workflow is designed so that related account, holdings, order, and portfolio updates remain consistent.
 
-TradeX implements an access-token and refresh-token based authentication flow.
+---
 
+# 📊 Real-Time Market Data
+
+TradeX uses WebSockets through Socket.IO to deliver market updates to the frontend.
+
+```text
+Market Simulator
+       │
+       ▼
+Backend Market Service
+       │
+       ▼
+Socket.IO
+       │
+       ▼
+React Client
+       │
+       ├── Live Price
+       ├── Market Overview
+       ├── Watchlist
+       └── Trading Chart
+```
+
+Redis is used to maintain fast-access market state.
+
+The current implementation uses simulated market prices for development and testing.
+
+This allows the complete frontend → backend → market → order workflow to be developed without depending on an external brokerage system.
+
+---
+
+# 🔐 Authentication
+
+TradeX uses JWT-based authentication with access and refresh tokens.
+
+```text
 Login
   │
   ▼
 Access Token + Refresh Token
   │
-  ├── Access Token → API requests
+  ├──────────────► Access Token
+  │                      │
+  │                      ▼
+  │                 API Requests
   │
-  └── Refresh Token → New access token
+  └──────────────► Refresh Token
+                         │
+                         ▼
+                  New Access Token
+```
 
-Logout invalidates the active session according to the backend session lifecycle.
+Protected requests include the access token.
 
-💻 Getting Started
+When an access token expires, the refresh-token flow can be used to obtain a new access token.
 
-Prerequisites
+---
 
-Make sure you have installed:
+# 🗄️ Data & Infrastructure
 
-Node.js
+TradeX uses different storage technologies based on the type of data.
 
-npm
+### MongoDB
 
-MongoDB
+Used for persistent application data such as:
 
-Redis
+* Users
+* Accounts
+* Orders
+* Holdings
+* Portfolio performance
 
-Git
+### Redis
 
-Docker (recommended for local Redis)
+Used for fast-access application state such as:
 
-1. Clone the repository
+* Current market prices
+* Market state
+* Frequently accessed market information
 
+### Socket.IO
+
+Used for:
+
+* Real-time market updates
+* Live frontend synchronization
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+* React
+* Vite
+* JavaScript
+* Axios
+* Socket.IO Client
+* Lightweight Charts
+* CSS
+
+## Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* Redis
+* Socket.IO
+* JWT
+* REST APIs
+* Swagger / OpenAPI
+
+## Development & Tools
+
+* Git
+* GitHub
+* Docker
+* Postman
+* VS Code
+
+---
+
+# 📁 Project Structure
+
+TradeX follows a monorepo structure.
+
+```text
+TradeX/
+│
+├── frontend/
+│   ├── public/
+│   │
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Dashboard/
+│   │   │   ├── Navbar/
+│   │   │   ├── Sidebar/
+│   │   │   └── StockSearch/
+│   │   │
+│   │   ├── context/
+│   │   ├── layouts/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── utils/
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── index.css
+│   │   ├── main.jsx
+│   │   └── socket.js
+│   │
+│   └── package.json
+│
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── constants/
+│   │   ├── docs/
+│   │   ├── errors/
+│   │   ├── events/
+│   │   ├── jobs/
+│   │   ├── middlewares/
+│   │   ├── modules/
+│   │   ├── app.js
+│   │   └── server.js
+│   │
+│   └── package.json
+│
+├── .gitignore
+└── README.md
+```
+
+---
+
+# 🧩 Backend Architecture
+
+The backend is organized around modules and separated responsibilities.
+
+```text
+Request
+  │
+  ▼
+Route
+  │
+  ▼
+Middleware
+  │
+  ├── Authentication
+  ├── Authorization
+  ├── Validation
+  ├── Rate Limiting
+  └── Request Logging
+  │
+  ▼
+Controller
+  │
+  ▼
+Service
+  │
+  ▼
+Repository / Data Layer
+  │
+  ▼
+MongoDB / Redis
+```
+
+This structure keeps HTTP handling, business logic, and persistence responsibilities separated.
+
+---
+
+# 🧪 API Development
+
+TradeX provides REST APIs for application functionality.
+
+API development and testing can be performed using:
+
+* Postman
+* Swagger / OpenAPI
+
+The backend includes API documentation for exploring available endpoints.
+
+---
+
+# 🔒 Error Handling & Validation
+
+TradeX includes backend-level safeguards for API requests.
+
+```text
+Incoming Request
+       │
+       ▼
+Authentication
+       │
+       ▼
+Validation
+       │
+       ▼
+Business Logic
+       │
+       ▼
+Error Handling
+       │
+       ▼
+Consistent API Response
+```
+
+The backend includes:
+
+* Request validation
+* Authentication middleware
+* Authorization middleware
+* Centralized error handling
+* Not-found handling
+* Rate limiting
+* Request IDs
+* Request logging
+
+---
+
+# 🎯 Engineering Goals
+
+TradeX is being developed to demonstrate practical software engineering concepts rather than only UI development.
+
+### Architecture
+
+* Modular backend design
+* Component-based frontend architecture
+* Separation of concerns
+* Reusable services
+* Structured project organization
+
+### Backend Engineering
+
+* REST API design
+* Business logic separation
+* Database transactions
+* Request validation
+* Centralized error handling
+* Authentication
+* Authorization
+
+### Distributed / Real-Time Concepts
+
+* WebSocket communication
+* Real-time market updates
+* Redis caching
+* Event-driven communication
+
+### Development Practices
+
+* Git-based development
+* API testing
+* API documentation
+* Environment-based configuration
+* Docker-based local infrastructure
+
+---
+
+# 💻 Getting Started
+
+## Prerequisites
+
+Install the following:
+
+* Node.js
+* npm
+* MongoDB
+* Redis
+* Git
+* Docker
+
+Docker is recommended for running Redis locally.
+
+---
+
+## 1. Clone the Repository
+
+```bash
 git clone https://github.com/karthikyannabthina/TradeX.git
+
 cd TradeX
+```
 
-2. Install frontend dependencies
+---
 
+## 2. Install Frontend Dependencies
+
+```bash
 cd frontend
-npm install
 
-3. Install backend dependencies
+npm install
+```
+
+---
+
+## 3. Install Backend Dependencies
 
 Open another terminal:
 
+```bash
 cd backend
+
 npm install
+```
 
-4. Configure environment variables
+---
 
-Create the required .env files based on the environment examples provided by the project.
+## 4. Configure Environment Variables
 
-Never commit real secrets, API keys, database credentials, or JWT secrets to GitHub.
+Create the required `.env` files for the frontend and backend.
 
-5. Start Redis
+Use the project's environment configuration as a reference.
 
-If Redis is configured through Docker, start your Redis container using the project's local Docker configuration.
+Do not commit sensitive information such as:
 
-6. Start the backend
+```text
+Database credentials
+JWT secrets
+API keys
+OAuth credentials
+Private tokens
+```
 
-From backend/:
+---
 
+## 5. Start Redis
+
+Start Redis using the local Docker configuration.
+
+---
+
+## 6. Start the Backend
+
+From the `backend` directory:
+
+```bash
 npm run dev
+```
 
-7. Start the frontend
+---
 
-From frontend/:
+## 7. Start the Frontend
 
+From the `frontend` directory:
+
+```bash
 npm run dev
+```
 
-The frontend and backend development servers will run independently.
+The frontend and backend run as separate development services.
 
-📁 Project Structure
+---
 
+# 🌐 Deployment
+
+TradeX is deployed using:
+
+```text
 Frontend
-
-The frontend follows a component-based React architecture.
-
-frontend/src
-├── components
-│   ├── Dashboard
-│   ├── Navbar
-│   ├── Sidebar
-│   └── StockSearch
-├── context
-├── layouts
-├── pages
-├── services
-├── utils
-├── App.jsx
-├── App.css
-├── index.css
-├── main.jsx
-└── socket.js
+   │
+   ▼
+Vercel
 
 Backend
+   │
+   ▼
+Render
 
-The backend is organized around modular services and middleware.
+Database
+   │
+   ▼
+MongoDB Atlas
 
-backend/src
-├── config
-├── constants
-├── docs
-├── errors
-├── events
-├── jobs
-├── middlewares
-├── modules
-├── app.js
-└── server.js
+Cache
+   │
+   ▼
+Upstash Redis
+```
 
-🧪 Testing & API Development
+### Live Application
 
-API endpoints can be tested using Postman.
+**Frontend**
 
-Swagger/OpenAPI documentation is included in the backend for exploring the available APIs.
+[https://trade-x-gold.vercel.app](https://trade-x-gold.vercel.app)
 
-🎯 Project Goals
+**Backend**
 
-TradeX is being developed with a focus on real-world software engineering rather than only UI implementation.
+[https://tradex-1-dwyu.onrender.com](https://tradex-1-dwyu.onrender.com)
 
-Key goals:
+---
 
-Clean frontend architecture
+# 🗺️ Roadmap
 
-Modular backend architecture
+### Completed
 
-Secure authentication
+* [x] React frontend foundation
+* [x] Node.js / Express backend
+* [x] MongoDB integration
+* [x] Redis integration
+* [x] JWT authentication
+* [x] Refresh-token flow
+* [x] Protected API routes
+* [x] Real-time market updates
+* [x] Interactive market charts
+* [x] Stock search
+* [x] Watchlist
+* [x] Holdings
+* [x] Order management
+* [x] Order execution workflow
+* [x] Portfolio performance tracking
+* [x] Monorepo structure
+* [x] Frontend deployment
+* [x] Backend deployment
 
-Real-time communication
+### In Progress
 
-Database-driven application design
+* [ ] Advanced portfolio analytics
+* [ ] Automated testing
+* [ ] Improved market-data architecture
+* [ ] Monitoring and observability
+* [ ] CI/CD pipeline
+* [ ] Expanded trading workflows
 
-Caching with Redis
+---
 
-Error handling
+# 📈 Future Improvements
 
-Validation
+Planned improvements include:
 
-Logging
+* More realistic market-data architecture
+* Expanded order types
+* Advanced portfolio analytics
+* Automated unit and integration testing
+* CI/CD automation
+* Application monitoring
+* Better observability
+* Improved fault handling
+* Performance optimization
+* More comprehensive API documentation
 
-Rate limiting
+---
 
-Scalable API design
+# 🧠 What This Project Demonstrates
 
-Production-oriented development practices
+TradeX demonstrates practical experience with:
 
-🗺️ Roadmap
+```text
+React
+  +
+Node.js / Express
+  +
+MongoDB
+  +
+Redis
+  +
+REST APIs
+  +
+WebSockets
+  +
+JWT Authentication
+  +
+Database Transactions
+  +
+Modular Architecture
+```
 
-React frontend foundation
+The project is intended to demonstrate how these technologies work together to build a real-time, data-driven application.
 
-Node.js backend foundation
+---
 
-MongoDB integration
-
-Redis integration
-
-Authentication flow
-
-Refresh-token lifecycle
-
-Real-time market updates
-
-Interactive market/portfolio charts
-
-Monorepo structure
-
-Complete order execution workflow
-
-Advanced portfolio analytics
-
-Improved market-data architecture
-
-Comprehensive automated testing
-
-Production deployment
-
-CI/CD pipeline
-
-Monitoring and observability improvements
-
-📌 Disclaimer
+# 📌 Disclaimer
 
 TradeX is an educational and portfolio project.
 
-It does not provide real financial brokerage services and should not be used for actual investment or trading decisions.
+It does not provide real brokerage services, execute real financial transactions, or provide financial advice.
 
-👨‍💻 Author
+The market data used in the current development environment is simulated.
 
-Karthik
+---
 
-Full Stack Developer
+# 👨‍💻 Author
 
-⭐ If you find this project useful, consider giving the repository a star.
+## Karthik
+
+**Full Stack Developer**
+
+Building full-stack applications with a focus on backend architecture, real-time systems, and practical software engineering.
+
+### Connect
+
+* GitHub: [https://github.com/karthikyannabthina](https://github.com/karthikyannabthina)
+* LinkedIn: Add your LinkedIn profile here
+
+---
+
+⭐ If you find TradeX interesting, consider giving the repository a star.
+
+```
