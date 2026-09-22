@@ -1,99 +1,187 @@
+import { useEffect, useMemo, useState } from "react";
+import { getPortfolio } from "../../features/portfolio/PortfolioAPI";
+import useMarketData from "../../context/useMarketData";
 import "./Positions.css";
 
-const positions = [
-  {
-    stock: "TCS",
-    qty: 10,
-    avg: 3400,
-    current: 3560,
-  },
-  {
-    stock: "INFY",
-    qty: -5,
-    avg: 1725,
-    current: 1718,
-  },
-  {
-    stock: "HDFCBANK",
-    qty: 20,
-    avg: 1810,
-    current: 1840,
-  },
-];
-
 const formatCurrency = (value) =>
-  `₹${Number(value).toLocaleString("en-IN", {
+  `₹${Number(value || 0).toLocaleString("en-IN", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`;
 
 export default function Positions() {
+  const [holdings, setHoldings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const { getStock } = useMarketData();
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadPortfolio = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const result = await getPortfolio();
+
+        const portfolio =
+          result?.data?.portfolio ||
+          result?.portfolio ||
+          null;
+
+        if (mounted) {
+          setHoldings(portfolio?.holdings || []);
+        }
+      } catch (err) {
+        console.error("Positions portfolio error:", err);
+
+        if (mounted) {
+          setError(
+            err?.response?.data?.error?.message ||
+              "Unable to load positions"
+          );
+        }
+      } finally {
+        if (mounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadPortfolio();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const positions = useMemo(() => {
+    return holdings.map((holding) => {
+      const marketStock = getStock(holding.symbol);
+
+      const current =
+        Number(
+          marketStock?.price ??
+            marketStock?.ltp ??
+            marketStock?.currentPrice ??
+            holding.averagePrice ??
+            0
+        );
+
+      const qty = Number(holding.quantity || 0);
+      const avg = Number(holding.averagePrice || 0);
+
+      const investment = qty * avg;
+      const currentValue = qty * current;
+      const pnl = currentValue - investment;
+
+      const pnlPercent = investment
+        ? (pnl / investment) * 100
+        : 0;
+
+      return {
+        ...holding,
+        qty,
+        avg,
+        current,
+        pnl,
+        pnlPercent,
+      };
+    });
+  }, [holdings, getStock]);
+
+  const totalPnL = positions.reduce(
+    (sum, position) => sum + position.pnl,
+    0
+  );
+
+  if (loading) {
+    return (
+      <div className="positions-page">
+        <h1>Open Positions</h1>
+        <p>Loading positions...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="positions-page">
+        <h1>Open Positions</h1>
+        <p className="red">{error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="positions-page">
       <h1>Open Positions</h1>
 
       <div className="day-card">
         <h3>Today's P&L</h3>
-        <h2 className="green">+₹2,340</h2>
+
+        <h2 className={totalPnL >= 0 ? "green" : "red"}>
+          {totalPnL >= 0 ? "+" : ""}
+          {formatCurrency(totalPnL)}
+        </h2>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Stock</th>
-            <th>Qty</th>
-            <th>Avg Price</th>
-            <th>LTP</th>
-            <th>P&L</th>
-            <th>P&L %</th>
-          </tr>
-        </thead>
+      {positions.length === 0 ? (
+        <p>No open positions.</p>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Stock</th>
+              <th>Qty</th>
+              <th>Avg Price</th>
+              <th>LTP</th>
+              <th>P&L</th>
+              <th>P&L %</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {positions.map((item) => {
-            const investment =
-              Math.abs(item.qty) * item.avg;
+          <tbody>
+            {positions.map((item) => {
+              const positive = item.pnl >= 0;
 
-            const currentValue =
-              Math.abs(item.qty) * item.current;
+              return (
+                <tr
+                  key={`${item.symbol}-${item.exchange}`}
+                >
+                  <td>{item.symbol}</td>
 
-            const pnl =
-              currentValue - investment;
+                  <td>{item.qty}</td>
 
-            const pnlPercent = investment
-              ? (pnl / investment) * 100
-              : 0;
+                  <td>{formatCurrency(item.avg)}</td>
 
-            const positive = pnl >= 0;
+                  <td>{formatCurrency(item.current)}</td>
 
-            return (
-              <tr key={item.stock}>
-                <td>{item.stock}</td>
+                  <td
+                    className={
+                      positive ? "green" : "red"
+                    }
+                  >
+                    {positive ? "+" : ""}
+                    {formatCurrency(item.pnl)}
+                  </td>
 
-                <td>{item.qty}</td>
-
-                <td>
-                  {formatCurrency(item.avg)}
-                </td>
-
-                <td>
-                  {formatCurrency(item.current)}
-                </td>
-
-                <td className={positive ? "green" : "red"}>
-                  {positive ? "+" : ""}
-                  {formatCurrency(pnl)}
-                </td>
-
-                <td className={positive ? "green" : "red"}>
-                  {positive ? "+" : ""}
-                  {pnlPercent.toFixed(2)}%
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                  <td
+                    className={
+                      positive ? "green" : "red"
+                    }
+                  >
+                    {positive ? "+" : ""}
+                    {item.pnlPercent.toFixed(2)}%
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

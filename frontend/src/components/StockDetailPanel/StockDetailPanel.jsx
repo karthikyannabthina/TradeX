@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createOrder } from "../../services/orderServiceClient";
 import "./StockDetailPanel.css";
 
 export default function StockDetailPanel({
@@ -65,21 +66,29 @@ export default function StockDetailPanel({
   };
 
   // NEW: Confirm order
-  const handleConfirmOrder = () => {
-    const order = {
-      symbol: stock.symbol,
-      exchange: stock.exchange,
-      type: orderType,
-      quantity: Number(quantity),
-      price: ltp,
-    };
+  const handleConfirmOrder = async () => {
+    try {
+        const orderData = {
+            symbol: stock.symbol,
+            exchange: stock.exchange,
+            side: orderType,
+            orderType: "MARKET",
+            quantity: Number(quantity),
+        };
 
-    console.log("ORDER:", order);
+        console.log("ORDER:", orderData);
 
-    // Backend API will be connected here later.
+        await createOrder(orderData);
 
-    setOrderType(null);
-  };
+        alert("Order placed successfully");
+
+        setOrderType(null);
+
+    } catch (error) {
+        console.error("Order failed:", error);
+        alert("Order failed");
+    }
+};
 
   return (
     <div className="stock-detail-overlay">

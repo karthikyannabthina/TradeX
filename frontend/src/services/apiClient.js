@@ -19,9 +19,17 @@ const notifyRefreshSubscribers = (token) => {
 };
 
 const refreshAccessToken = async () => {
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  if (!refreshToken) {
+    throw new Error("No refresh token available");
+  }
+
   const response = await axios.post(
     `${API_BASE_URL}/auth/refresh`,
-    {},
+    {
+      refreshToken,
+    },
     {
       withCredentials: true,
     }
@@ -31,12 +39,18 @@ const refreshAccessToken = async () => {
   const result = data?.data || data;
 
   const newToken = result?.accessToken;
+  const newRefreshToken = result?.refreshToken;
 
   if (!newToken) {
     throw new Error("Refresh token did not return an access token");
   }
 
   localStorage.setItem("accessToken", newToken);
+
+  // Backend rotates the refresh token
+  if (newRefreshToken) {
+    localStorage.setItem("refreshToken", newRefreshToken);
+  }
 
   return newToken;
 };
@@ -145,6 +159,7 @@ api.interceptors.response.use(
       refreshSubscribers = [];
 
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
 
       return Promise.reject(refreshError);
     } finally {

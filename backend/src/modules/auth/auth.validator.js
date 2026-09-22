@@ -32,6 +32,13 @@ const loginSchema = z.object({
     .max(128, "Password cannot exceed 128 characters"),
 });
 
+const googleLoginSchema = z.object({
+  idToken: z
+    .string()
+    .trim()
+    .min(1, "Google ID token is required"),
+});
+
 const refreshSchema = z.object({
   refreshToken: z
     .string()
@@ -49,6 +56,7 @@ const logoutSchema = z.object({
 module.exports = {
   registerSchema,
   loginSchema,
+  googleLoginSchema,
   refreshSchema,
   logoutSchema,
 };

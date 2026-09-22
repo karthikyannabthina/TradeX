@@ -22,6 +22,16 @@ const login = async (req, res) => {
   });
 };
 
+const googleLogin = async (req, res) => {
+  const result = await authService.googleLogin(req.validated);
+
+  return res.status(200).json({
+    success: true,
+    message: "Google login successful",
+    data: result,
+  });
+};
+
 const refresh = async (req, res) => {
   const result = await authService.refresh(req.validated);
 
@@ -44,6 +54,7 @@ const logout = async (req, res) => {
 module.exports = {
   register,
   login,
+  googleLogin,
   refresh,
   logout,
 };

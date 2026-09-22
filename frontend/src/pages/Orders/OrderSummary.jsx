@@ -1,19 +1,18 @@
 import "./Orders.css";
 
 export default function OrderSummary({ orders }) {
-
   const totalOrders = orders.length;
 
   const completedOrders = orders.filter(
-    (order) => order.status === "Completed"
+    (order) => order.status === "EXECUTED"
   ).length;
 
   const pendingOrders = orders.filter(
-    (order) => order.status === "Pending"
+    (order) => order.status === "PENDING"
   ).length;
 
   const cancelledOrders = orders.filter(
-    (order) => order.status === "Cancelled"
+    (order) => order.status === "CANCELLED"
   ).length;
 
   return (

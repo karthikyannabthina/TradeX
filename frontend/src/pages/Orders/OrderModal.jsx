@@ -1,6 +1,8 @@
 export default function OrderModal({ order, onClose }) {
   if (!order) return null;
 
+  const date = new Date(order.createdAt);
+
   return (
     <div className="modal-overlay">
 
@@ -21,12 +23,12 @@ export default function OrderModal({ order, onClose }) {
 
           <div className="modal-row">
             <span>Order ID</span>
-            <strong>{order.orderId}</strong>
+            <strong>{order._id}</strong>
           </div>
 
           <div className="modal-row">
             <span>Stock</span>
-            <strong>{order.stock}</strong>
+            <strong>{order.symbol}</strong>
           </div>
 
           <div className="modal-row">
@@ -39,24 +41,23 @@ export default function OrderModal({ order, onClose }) {
 
             <span
               className={
-                order.type === "BUY"
+                order.side === "BUY"
                   ? "buy-badge"
                   : "sell-badge"
               }
             >
-              {order.type}
+              {order.side}
             </span>
-
           </div>
 
           <div className="modal-row">
             <span>Quantity</span>
-            <strong>{order.qty}</strong>
+            <strong>{order.quantity}</strong>
           </div>
 
           <div className="modal-row">
             <span>Price</span>
-            <strong>₹{order.price}</strong>
+            <strong>₹{order.executedPrice}</strong>
           </div>
 
           <div className="modal-row">
@@ -64,39 +65,36 @@ export default function OrderModal({ order, onClose }) {
 
             <span
               className={`status ${
-                order.status === "Completed"
+                order.status === "EXECUTED"
                   ? "completed"
-                  : order.status === "Pending"
+                  : order.status === "PENDING"
                   ? "pending"
                   : "cancelled"
               }`}
             >
               {order.status}
             </span>
-
           </div>
 
           <div className="modal-row">
             <span>Date</span>
-            <strong>{order.date}</strong>
+            <strong>{date.toLocaleDateString()}</strong>
           </div>
 
           <div className="modal-row">
             <span>Time</span>
-            <strong>{order.time}</strong>
+            <strong>{date.toLocaleTimeString()}</strong>
           </div>
 
         </div>
 
         <div className="modal-footer">
-
           <button
             className="close-modal-btn"
             onClick={onClose}
           >
             Close
           </button>
-
         </div>
 
       </div>

@@ -1,4 +1,6 @@
 const portfolioService = require("./portfolio.service");
+const portfolioPerformanceService =
+  require("./portfolio-performance.service");
 
 const getPortfolio = async (req, res) => {
   const userId = req.user.userId;
@@ -13,6 +15,24 @@ const getPortfolio = async (req, res) => {
   });
 };
 
+const getPortfolioPerformance = async (req, res) => {
+  const userId = req.user.userId;
+
+  const performance =
+    await portfolioPerformanceService.getPerformanceHistory(
+      userId
+    );
+
+  return res.status(200).json({
+    success: true,
+    message: "Portfolio performance retrieved successfully",
+    data: {
+      performance,
+    },
+  });
+};
+
 module.exports = {
   getPortfolio,
+  getPortfolioPerformance,
 };

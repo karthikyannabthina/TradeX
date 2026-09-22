@@ -28,9 +28,11 @@ const env = {
     .map((origin) => origin.trim())
     .filter(Boolean),
 
-  authRateLimitWindowMs:
-    Number(process.env.AUTH_RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
-  authRateLimitMax: Number(process.env.AUTH_RATE_LIMIT_MAX) || 20,
+ authRateLimitWindowMs:
+  Number(process.env.AUTH_RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
+
+authRateLimitMax:
+  Number(process.env.AUTH_RATE_LIMIT_MAX) || 100,
 };
 
 if (!env.mongoUri) {

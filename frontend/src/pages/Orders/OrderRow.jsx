@@ -4,61 +4,58 @@ export default function OrderRow({
   order,
   onView,
 }) {
+  const date = new Date(order.createdAt);
 
   return (
-
     <tr>
 
-      <td>{order.orderId}</td>
+      <td>{order._id}</td>
 
       <td>
-
         <span
           className={
-            order.type === "BUY"
+            order.side === "BUY"
               ? "buy-badge"
               : "sell-badge"
           }
         >
-          {order.type}
+          {order.side}
         </span>
-
       </td>
 
       <td className="stock-name">
-        {order.stock}
+        {order.symbol}
       </td>
 
       <td>{order.exchange}</td>
 
-      <td>{order.qty}</td>
+      <td>{order.quantity}</td>
 
-      <td>₹{order.price}</td>
+      <td>₹{order.executedPrice}</td>
 
       <td>
-
         <StatusBadge
           status={order.status}
         />
-
       </td>
 
-      <td>{order.date}</td>
-
-      <td>{order.time}</td>
+      <td>
+        {date.toLocaleDateString()}
+      </td>
 
       <td>
+        {date.toLocaleTimeString()}
+      </td>
 
+      <td>
         <button
           className="view-btn btn"
           onClick={() => onView(order)}
         >
           View
         </button>
-
       </td>
 
     </tr>
-
   );
 }

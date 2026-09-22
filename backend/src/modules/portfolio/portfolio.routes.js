@@ -12,4 +12,12 @@ router.get(
   asyncHandler(portfolioController.getPortfolio)
 );
 
+router.get(
+  "/performance",
+  authMiddleware,
+  asyncHandler(
+    portfolioController.getPortfolioPerformance
+  )
+);
+
 module.exports = router;

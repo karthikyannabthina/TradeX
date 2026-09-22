@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Orders.css";
 
-import ordersData from "./ordersData";
+import { getOrders } from "../../services/orderServiceClient";
+
 import OrderSummary from "./OrderSummary";
 import OrderFilters from "./OrderFilters";
 import OrdersTable from "./OrdersTable";
@@ -10,9 +11,11 @@ import OrderModal from "./OrderModal";
 import NewOrderModal from "./NewOrderModal";
 
 export default function Orders() {
-
   // Orders State
-  const [orders, setOrders] = useState(ordersData);
+  const [orders, setOrders] = useState([]);
+
+  // Loading State
+  const [loading, setLoading] = useState(true);
 
   // Filter States
   const [search, setSearch] = useState("");
@@ -25,6 +28,35 @@ export default function Orders() {
   // New Order Modal
   const [showNewOrder, setShowNewOrder] = useState(false);
 
+  // Fetch Orders
+ useEffect(() => {
+  console.log("ORDERS PAGE LOADED");
+
+  const fetchOrders = async () => {
+    console.log("FETCHING ORDERS");
+
+    try {
+      const response = await getOrders();
+
+     console.log(
+  "ORDERS RESPONSE:",
+  JSON.stringify(response, null, 2)
+);
+
+      const data = response?.data || response || [];
+
+      setOrders(data);
+    } catch (error) {
+      console.error("FAILED TO FETCH ORDERS:", error);
+      setOrders([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchOrders();
+}, []);
+
   // Add New Order
   function addOrder(newOrder) {
     setOrders((prevOrders) => [newOrder, ...prevOrders]);
@@ -32,19 +64,38 @@ export default function Orders() {
 
   // Filter Orders
   const filteredOrders = orders.filter((order) => {
+    const stockName = order.stock || order.symbol || "";
 
     const matchesSearch =
-      order.stock.toLowerCase().includes(search.toLowerCase());
+      stockName.toLowerCase().includes(search.toLowerCase());
+
+    const orderStatus = order.status || "";
+
+    const orderType = order.type || order.side || "";
 
     const matchesStatus =
-      status === "All" || order.status === status;
+      status === "All" || orderStatus === status;
 
     const matchesType =
-      type === "All" || order.type === type;
+      type === "All" || orderType === type;
 
     return matchesSearch && matchesStatus && matchesType;
-
   });
+
+  if (loading) {
+    return (
+      <div className="orders-page">
+        <div className="orders-header">
+          <div>
+            <h1>Orders</h1>
+            <p>Manage and track all your stock orders.</p>
+          </div>
+        </div>
+
+        <p>Loading orders...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="orders-page">

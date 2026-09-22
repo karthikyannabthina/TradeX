@@ -5,6 +5,7 @@ const authController = require("./auth.controller");
 const {
   registerSchema,
   loginSchema,
+  googleLoginSchema,
   refreshSchema,
   logoutSchema,
 } = require("./auth.validator");
@@ -25,6 +26,12 @@ router.post(
   "/login",
   validationMiddleware(loginSchema),
   asyncHandler(authController.login)
+);
+
+router.post(
+  "/google",
+  validationMiddleware(googleLoginSchema),
+  asyncHandler(authController.googleLogin)
 );
 
 router.post(

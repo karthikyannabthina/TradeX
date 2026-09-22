@@ -35,7 +35,7 @@ export default function OrdersTable({
           {orders.map((order) => (
 
             <OrderRow
-              key={order.id}
+              key={order._id}
               order={order}
               onView={onView}
             />

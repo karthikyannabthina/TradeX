@@ -33,7 +33,7 @@ const RANGES = [
 
 const ONE_MINUTE = 60;
 
-export default function PortfolioChart() {
+export default function PortfolioChart({ onTrade }) {
   const chartContainerRef = useRef(null);
 
   const chartRef = useRef(null);
@@ -872,6 +872,22 @@ export default function PortfolioChart() {
           </div>
 
         </div>
+
+        <div className="trade-actions">
+  <button
+    className="trade-buy-btn"
+    onClick={() => onTrade("BUY", symbol, currentPrice)}
+  >
+    BUY
+  </button>
+
+  <button
+    className="trade-sell-btn"
+    onClick={() => onTrade("SELL", symbol, currentPrice)}
+  >
+    SELL
+  </button>
+</div>
 
 
         {/* RANGE SELECTOR */}

@@ -24,6 +24,8 @@ const {
 
 const { hashToken } = require("../../utils/crypto");
 
+const { verifyGoogleToken } = require("../../utils/google-auth");
+
 
 // ==========================================
 // REGISTER
@@ -174,6 +176,138 @@ const login = async ({ email, password }) => {
   };
 };
 
+// ==========================================
+// GOOGLE LOGIN
+// ==========================================
+
+const googleLogin = async ({ idToken }) => {
+  // 1. Verify Google ID token
+  let googleUser;
+
+  try {
+    googleUser = await verifyGoogleToken(idToken);
+  } catch (error) {
+    throw new AppError(
+      "Invalid Google token",
+      401,
+      "INVALID_GOOGLE_TOKEN"
+    );
+  }
+
+  const { email, name } = googleUser;
+
+  if (!email) {
+    throw new AppError(
+      "Google account email not available",
+      400,
+      "GOOGLE_EMAIL_MISSING"
+    );
+  }
+
+  // 2. Find existing TradeX user
+  let user = await userRepository.findByEmail(
+    email.toLowerCase(),
+    false
+  );
+
+  // 3. Create TradeX user if it doesn't exist
+  if (!user) {
+    const session = await mongoose.startSession();
+
+    try {
+      session.startTransaction();
+
+      user = await userRepository.createUser(
+        {
+          name: name || "TradeX User",
+          email: email.toLowerCase(),
+        },
+        session
+      );
+
+      await accountRepository.createAccount(
+        user._id,
+        session
+      );
+
+      await portfolioRepository.createPortfolio(
+        user._id,
+        session
+      );
+
+      await session.commitTransaction();
+    } catch (error) {
+      await session.abortTransaction();
+      throw error;
+    } finally {
+      session.endSession();
+    }
+  }
+
+  // 4. Check account status
+  if (!user.isActive) {
+    throw new AppError(
+      "User account is inactive",
+      403,
+      "ACCOUNT_INACTIVE"
+    );
+  }
+
+  // 5. Create session ID
+  const sessionId = crypto.randomUUID();
+
+  // 6. JWT payload
+  const payload = {
+    userId: user._id.toString(),
+    role: user.role,
+    sessionId,
+  };
+
+  // 7. Generate tokens
+  const accessToken = generateAccessToken(payload);
+
+  const refreshToken = generateRefreshToken(payload);
+
+  // 8. Hash refresh token
+  const refreshTokenHash = hashToken(refreshToken);
+
+  // 9. Determine session expiry
+  let expiresAt = new Date(
+    Date.now() + 7 * 24 * 60 * 60 * 1000
+  );
+
+  try {
+    const decoded = verifyRefreshToken(refreshToken);
+
+    if (decoded && decoded.exp) {
+      expiresAt = new Date(decoded.exp * 1000);
+    }
+  } catch (err) {
+    // Use default expiry
+  }
+
+  // 10. Save session
+  await sessionRepository.createSession({
+    userId: user._id,
+    refreshTokenHash,
+    expiresAt,
+  });
+
+  // 11. Return same structure as normal login
+  return {
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+
+    accessToken,
+
+    refreshToken,
+  };
+};
+
 const getValidSessionForRefreshToken = async (userId, refreshToken) => {
   const sessions = await sessionRepository.findByUserId(userId);
   const refreshTokenHash = hashToken(refreshToken);
@@ -287,6 +421,7 @@ const logout = async ({ refreshToken }) => {
 module.exports = {
   register,
   login,
+  googleLogin,
   refresh,
   logout,
 };

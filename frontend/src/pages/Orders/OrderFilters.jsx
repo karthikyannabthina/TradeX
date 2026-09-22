@@ -18,15 +18,15 @@ export default function OrderFilters({
       />
 
       <select
-        className="input"
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
-      >
-        <option value="All">All Status</option>
-        <option value="Completed">Completed</option>
-        <option value="Pending">Pending</option>
-        <option value="Cancelled">Cancelled</option>
-      </select>
+  className="input"
+  value={status}
+  onChange={(e) => setStatus(e.target.value)}
+>
+  <option value="All">All Status</option>
+  <option value="EXECUTED">Completed</option>
+  <option value="PENDING">Pending</option>
+  <option value="CANCELLED">Cancelled</option>
+</select>
 
       <select
         className="input"

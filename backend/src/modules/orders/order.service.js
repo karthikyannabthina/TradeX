@@ -17,6 +17,9 @@ const stockRepository =
 const AppError =
   require("../../errors/AppError");
 
+const portfolioPerformanceService =
+  require("../portfolio/portfolio-performance.service");  
+
 const createOrder = async ({
   userId,
   symbol,
@@ -171,7 +174,71 @@ const createOrder = async ({
       );
 
     // --------------------------------
-    // 7. Commit transaction
+// 7. Create portfolio performance snapshot
+// --------------------------------
+
+const updatedPortfolio =
+  await portfolioService.getPortfolio(
+    userId,
+    session
+  );
+
+let portfolioValue = 0;
+let investedAmount = 0;
+
+for (const holding of updatedPortfolio.holdings) {
+  const market =
+    await marketRepository.getMarketState(
+      holding.symbol
+    );
+
+  if (!market) {
+    continue;
+  }
+
+  const quantity = Number(
+    holding.quantity || 0
+  );
+
+  const averagePrice = Number(
+    holding.averagePrice || 0
+  );
+
+  const currentPrice = Number(
+    market.currentPrice || 0
+  );
+
+  investedAmount +=
+    quantity * averagePrice;
+
+  portfolioValue +=
+    quantity * currentPrice;
+}
+
+const updatedAccount =
+  await accountRepository.findByUserId(
+    userId,
+    session
+  );
+
+const availableFunds =
+  Number(updatedAccount?.balance || 0) -
+  Number(updatedAccount?.blockedAmount || 0);
+
+const pnl =
+  portfolioValue - investedAmount;
+
+await portfolioPerformanceService.createSnapshot({
+  userId,
+  portfolioValue,
+  investedAmount,
+  availableFunds,
+  pnl,
+  session,
+});
+
+    // --------------------------------
+    // 8. Commit transaction
     // --------------------------------
 
     await session.commitTransaction();

@@ -13,7 +13,8 @@ export default function BuyModal({stock,onClose}){
 
 
     const handleBuy = async()=>{
-
+        
+         console.log("BUY BUTTON CLICKED");
 
         try{
 
@@ -23,10 +24,10 @@ export default function BuyModal({stock,onClose}){
             const orderData = {
 
                 symbol: stock.symbol,
-                name: stock.name,
-                quantity: quantity,
-                price: stock.price,
-                type:"BUY"
+                exchange: stock.exchange,
+                side: "BUY",
+                orderType: "MARKET",
+                quantity: quantity
 
             };
 
@@ -100,9 +101,11 @@ export default function BuyModal({stock,onClose}){
 
 
                     <button
-                        onClick={handleBuy}
-                        disabled={loading}
-                    >
+    type="button"
+    onMouseDown={() => console.log("MOUSE DOWN")}
+    onClick={handleBuy}
+    disabled={loading}
+>
 
                         {
                             loading 

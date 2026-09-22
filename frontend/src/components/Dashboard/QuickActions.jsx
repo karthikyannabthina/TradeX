@@ -1,4 +1,5 @@
 import "./QuickActions.css";
+
 import {
   FaPlus,
   FaArrowUp,
@@ -6,27 +7,31 @@ import {
   FaChartLine,
 } from "react-icons/fa";
 
-export default function QuickActions() {
+export default function QuickActions({ onOrder }) {
   const actions = [
     {
       title: "Add Funds",
       icon: <FaPlus />,
       color: "#387ed1",
+      action: null,
     },
     {
       title: "Withdraw",
       icon: <FaArrowUp />,
       color: "#ff9800",
+      action: null,
     },
     {
       title: "Buy Stock",
       icon: <FaShoppingCart />,
       color: "#00c853",
+      action: () => onOrder?.("BUY"),
     },
     {
       title: "Sell Stock",
       icon: <FaChartLine />,
       color: "#ef5350",
+      action: () => onOrder?.("SELL"),
     },
   ];
 
@@ -37,9 +42,13 @@ export default function QuickActions() {
 
       <div className="actions-grid">
 
-        {actions.map((item, index) => (
-
-          <div className="action-card" key={index}>
+        {actions.map((item) => (
+          <button
+            className="action-card"
+            key={item.title}
+            type="button"
+            onClick={item.action}
+          >
 
             <div
               className="action-icon"
@@ -48,10 +57,11 @@ export default function QuickActions() {
               {item.icon}
             </div>
 
-            <h4>{item.title}</h4>
+            <h4>
+              {item.title}
+            </h4>
 
-          </div>
-
+          </button>
         ))}
 
       </div>
