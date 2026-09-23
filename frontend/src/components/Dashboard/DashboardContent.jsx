@@ -12,10 +12,13 @@ import QuickActions from "./QuickActions";
 
 import { fadeUp } from "../../animations/variants";
 import { getOrders } from "../../services/orderServiceClient";
+import { useAuth } from "../../context/AuthContext";
 
 import NewOrderModal from "../../pages/Orders/NewOrderModal";
 
 export default function DashboardContent() {
+  const { user } = useAuth();
+
   const [orders, setOrders] = useState([]);
 
   const [showNewOrder, setShowNewOrder] = useState(false);
@@ -49,15 +52,15 @@ export default function DashboardContent() {
   }, []);
 
   function handleQuickOrder(
-  type,
-  stock = "",
-  price = 0
-) {
-  setOrderType(type);
-  setSelectedStock(stock);
-  setSelectedPrice(price);
-  setShowNewOrder(true);
-}
+    type,
+    stock = "",
+    price = 0
+  ) {
+    setOrderType(type);
+    setSelectedStock(stock);
+    setSelectedPrice(price);
+    setShowNewOrder(true);
+  }
 
   function handleOrderAdded(newOrder) {
     setOrders((prevOrders) => [
@@ -75,35 +78,29 @@ export default function DashboardContent() {
       initial="hidden"
       animate="visible"
     >
-
       {/* =========================
           HEADER
       ========================= */}
 
       <header className="dashboard-header">
-
         <div className="dashboard-heading">
-
           <span className="dashboard-eyebrow">
             OVERVIEW
           </span>
 
           <h1>
-            Good morning, Karthik
+            Good morning, {user?.name || "Trader"}
           </h1>
 
           <p>
             Here's what's happening with your portfolio today.
           </p>
-
         </div>
 
         <div className="market-status">
-
           <span className="live-dot" />
 
           <div>
-
             <span className="market-status-label">
               Market
             </span>
@@ -111,13 +108,9 @@ export default function DashboardContent() {
             <strong>
               Open
             </strong>
-
           </div>
-
         </div>
-
       </header>
-
 
       {/* =========================
           SUMMARY CARDS
@@ -127,28 +120,20 @@ export default function DashboardContent() {
         <SummaryCards />
       </section>
 
-
       {/* =========================
           MARKET CHART + WATCHLIST
       ========================= */}
 
       <section className="dashboard-main-grid">
-
         <div className="dashboard-panel performance-panel">
-
           <PortfolioChart
             onTrade={handleQuickOrder}
           />
-
         </div>
 
-
         <div className="dashboard-panel watchlist-panel">
-
           <div className="panel-heading">
-
             <div>
-
               <span className="section-label">
                 MARKET
               </span>
@@ -156,32 +141,24 @@ export default function DashboardContent() {
               <h2>
                 Watchlist
               </h2>
-
             </div>
 
             <button className="panel-link">
               View all
             </button>
-
           </div>
 
           <Watchlist />
-
         </div>
-
       </section>
-
 
       {/* =========================
           MARKET OVERVIEW
       ========================= */}
 
       <section className="dashboard-panel market-overview-panel">
-
         <div className="panel-heading">
-
           <div>
-
             <span className="section-label">
               MARKET
             </span>
@@ -189,23 +166,16 @@ export default function DashboardContent() {
             <h2>
               Market Overview
             </h2>
-
           </div>
 
           <span className="market-live">
-
             <span className="live-dot" />
-
             Live
-
           </span>
-
         </div>
 
         <MarketOverview />
-
       </section>
-
 
       {/* =========================
           HOLDINGS + ORDERS
@@ -216,11 +186,8 @@ export default function DashboardContent() {
         {/* HOLDINGS */}
 
         <div className="dashboard-panel holdings-panel">
-
           <div className="panel-heading">
-
             <div>
-
               <span className="section-label">
                 PORTFOLIO
               </span>
@@ -228,28 +195,21 @@ export default function DashboardContent() {
               <h2>
                 Holdings
               </h2>
-
             </div>
 
             <button className="panel-link">
               View all
             </button>
-
           </div>
 
           <HoldingsTable />
-
         </div>
-
 
         {/* RECENT ORDERS */}
 
         <div className="dashboard-panel recent-orders-panel">
-
           <div className="panel-heading">
-
             <div>
-
               <span className="section-label">
                 ACTIVITY
               </span>
@@ -257,45 +217,32 @@ export default function DashboardContent() {
               <h2>
                 Recent Orders
               </h2>
-
             </div>
 
             <button className="panel-link">
               View all
             </button>
-
           </div>
 
-
           <div className="recent-orders-list">
-
             {orders.length === 0 ? (
-
               <div className="recent-order">
-
                 <span>
                   No recent orders
                 </span>
-
               </div>
-
             ) : (
-
               orders.map((order) => (
-
                 <div
                   className="recent-order"
                   key={order._id}
                 >
-
                   <div className="order-symbol">
-
                     <span className="order-avatar">
                       {order.symbol?.charAt(0)}
                     </span>
 
                     <div>
-
                       <strong>
                         {order.symbol}
                       </strong>
@@ -304,11 +251,8 @@ export default function DashboardContent() {
                         {order.exchange} ·{" "}
                         {order.quantity} Qty
                       </small>
-
                     </div>
-
                   </div>
-
 
                   <span
                     className={
@@ -320,16 +264,12 @@ export default function DashboardContent() {
                     {order.side}
                   </span>
 
-
                   <span className="order-price">
-
                     ₹
                     {Number(
                       order.executedPrice || 0
                     ).toLocaleString("en-IN")}
-
                   </span>
-
 
                   <span
                     className={
@@ -340,50 +280,38 @@ export default function DashboardContent() {
                   >
                     {order.status}
                   </span>
-
                 </div>
-
               ))
-
             )}
-
           </div>
-
         </div>
-
       </section>
-
 
       {/* =========================
           QUICK ACTIONS
       ========================= */}
 
       <section className="dashboard-panel quick-actions-panel">
-
         <QuickActions
           onOrder={handleQuickOrder}
         />
-
       </section>
-
 
       {/* =========================
           NEW ORDER MODAL
       ========================= */}
 
       {showNewOrder && (
-
         <NewOrderModal
           initialType={orderType}
           initialStock={selectedStock}
+          initialPrice={selectedPrice}
           onClose={() =>
             setShowNewOrder(false)
           }
           onAddOrder={handleOrderAdded}
         />
-
       )}
-
     </motion.main>
   );
 }
