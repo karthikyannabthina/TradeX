@@ -1,6 +1,6 @@
 const dns = require("dns");
 
-dns.setServers(["8.8.8.8", "1.1.1.1"]);
+dns.setServers(["172.100.0.1"]);
 
 const http = require("http");
 
